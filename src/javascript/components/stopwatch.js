@@ -8,6 +8,7 @@ function stopwatch() {
             $stopButton         = document.querySelector('[data-action="stop"]'),
             $resetButton        = document.querySelector('[data-action="reset"]'),
             $saveButton         = document.querySelector('[data-action="save"]'),
+            $clearButton        = document.querySelector('[data-action="clear-all"]'),
             minutes             = document.querySelector('.minutes'),
             seconds             = document.querySelector('.seconds');
 
@@ -34,32 +35,54 @@ function stopwatch() {
             minutes.innerText = '00';
         }
 
+        // Clear time list
+        function clearData() {
+            localStorage.removeItem('storageString');
+            updateTimeList();
+        }
+
         // Add to localStorage
         function addStoredItem(title, time) {
-            var existingItems = JSON.parse(localStorage.getItem('storageString')) || [];
+            const existingItems = JSON.parse(localStorage.getItem('storageString')) || [];
             
-            var newItem = {
-                'title': name,
-                'time': time
+            const newItem = {
+                title,
+                time
             };
     
             existingItems.push(newItem);
             localStorage.setItem('storageString', JSON.stringify(existingItems));
         }
 
+        // Reset UI
+        function resetUI() {
+            $('.time-label').val('');
+        }
+
         // Update UI
         function updateTimeList() {
-            $('.time-list').text(localStorage.getItem(localStorage.key('storageString')));
+            $('.time-list').html('');
+
+            if (localStorage.getItem('storageString').length) {
+                var data = JSON.parse(localStorage.getItem('storageString'));
+                var arrayLength = data.length;
+
+                for (var i = 0; i < arrayLength; i++) {
+                    $('.time-list').append('<li><div>title: ' + data[i].title + '</div><div>time: ' + data[i].time + '</div></li>');
+                }
+            }
         }
 
         // Save time value
         function saveTimer() {
             const numOfMinutes      = Math.floor(timerTime / 60),
                 numOfSeconds        = timerTime % 60,
-                totalTime           = '' + numOfMinutes + ':' + numOfSeconds;
+                totalTime           = '' + numOfMinutes + ':' + numOfSeconds,
+                label               = $('.time-label').val();
 
-            addStoredItem('time', totalTime);
+            addStoredItem(label, totalTime);
             updateTimeList();
+            resetUI();
             resetTimer();
         }
 
@@ -76,6 +99,7 @@ function stopwatch() {
         $stopButton.addEventListener('click', stopTimer);
         $resetButton.addEventListener('click', resetTimer);
         $saveButton.addEventListener('click', saveTimer);
+        $clearButton.addEventListener('click', clearData);
     }
 
     function bindEvents() {
