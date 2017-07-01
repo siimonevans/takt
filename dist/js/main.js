@@ -2251,11 +2251,13 @@ function stopwatch() {
             }
 
             jquery('.time-label').addClass('time-label--show');
+            jquery('.timer-wrapper').addClass('timer-wrapper--running');
         }
 
         function stopTimer() {
             isRunning = false;
             clearInterval(interval);
+            jquery('.timer-wrapper').removeClass('timer-wrapper--running');
         }
 
         function resetTimer() {

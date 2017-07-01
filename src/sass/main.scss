@@ -58,7 +58,10 @@
 /*------------------------------------*\
     $MOLECULES
 \*------------------------------------*/
+@import 'molecules/task-area';
+@import 'molecules/timer-area';
 @import 'molecules/timer';
+@import 'molecules/controls';
 
 /*------------------------------------*\
     $ORGANISMS

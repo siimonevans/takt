@@ -3,7 +3,13 @@
 \*------------------------------------*/
 
 .timer {
+    position: absolute;
+    width: 100%;
+    margin-top: 54px;
+    font-size: 40px;
+    font-weight: 200;
     color: #fff;
+    text-align: center;
 }
 
 .time-list {
@@ -19,8 +25,25 @@
 }
 
 .time-label {
+    @include placeholder-text {
+        color: #f0eef9;
+    }
+
     display: none;
-    margin-bottom: 10px;
+    width: 57%;
+    padding: 10px;
+    margin: 30px auto 0;
+    color: #fff;
+    background-color: transparent;
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 1px solid #777094;
+    border-left: 0;
+
+    &:focus,
+    &:hover {
+        outline: 0;
+    }
 
     &--show {
         display: block;

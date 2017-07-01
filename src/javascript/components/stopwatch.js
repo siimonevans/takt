@@ -23,11 +23,13 @@ function stopwatch() {
             }
 
             $('.time-label').addClass('time-label--show');
+            $('.timer-wrapper').addClass('timer-wrapper--running');
         }
 
         function stopTimer() {
             isRunning = false;
             clearInterval(interval);
+            $('.timer-wrapper').removeClass('timer-wrapper--running');
         }
 
         function resetTimer() {

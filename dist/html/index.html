@@ -9,21 +9,27 @@
     <link rel="stylesheet" href="../css/main.css" media="all" />
   </head>
   <body>
-    <div class="timer">
-      <span class="minutes">00</span> :
-      <span class="seconds">00</span>
+    <div class="app">
+      <div class="task-area">
+        <ul class="time-list"></ul>
+      </div><!--
+      --><div class="timer-area">
+        <div class="timer-wrapper">
+          <div class="timer">
+            <span class="minutes">00</span> :
+            <span class="seconds">00</span>
+          </div>
+        </div>
+        <div class="controls">
+          <button data-action="start">Start</button>
+          <button data-action="stop">Stop</button>
+          <button data-action="save">Save</button>
+          <button data-action="reset">Reset</button>
+          <button data-action="clear-all">Clear</button>
+          <input type="text" class="time-label" placeholder="Task name&hellip;">
+        </div>
+      </div>
     </div>
-    <input type="text" class="time-label">
-
-    <div class="timer-buttons">
-      <button data-action="start">Start</button>
-      <button data-action="stop">Stop</button>
-      <button data-action="save">Save</button>
-      <button data-action="reset">Reset</button>
-      <button data-action="clear-all">Clear all</button>
-    </div>
-
-    <ul class="time-list"></ul>
     <script type="text/javascript" src="../js/main.js"></script>
   </body>
 </html>

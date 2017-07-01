@@ -1400,9 +1400,8 @@ html {
 }
 
 body {
-  padding: 50px;
   overflow-x: hidden;
-  background-color: #131313;
+  color: #fff;
 }
 
 img,
@@ -1542,10 +1541,65 @@ small, .milli {
 
 /*------------------------------------*    $MOLECULES
 \*------------------------------------*/
+/*------------------------------------*    $TASK AREA
+\*------------------------------------*/
+.task-area {
+  display: inline-block;
+  width: 50%;
+  height: 100vh;
+  padding: 50px;
+  vertical-align: top;
+  background-color: #120d2f;
+}
+
+/*------------------------------------*    $TIMER AREA
+\*------------------------------------*/
+.timer-area {
+  display: inline-block;
+  width: 50%;
+  height: 100vh;
+  padding-top: 100px;
+  vertical-align: top;
+  background-color: #09061b;
+}
+
+.timer-wrapper {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+  border: 8px solid #9581b1;
+  border-radius: 50%;
+  box-shadow: 0 3px 25px 5px #33204c;
+  transition: border-color 300ms ease, box-shadow 300ms ease;
+}
+
+.timer-wrapper::before {
+  position: absolute;
+  top: -5px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #09061b;
+  border-radius: 50%;
+  content: '';
+}
+
+.timer-wrapper--running {
+  border-color: #d7bbff;
+  box-shadow: 0 7px 50px 10px #5b3b86;
+}
+
 /*------------------------------------*    $TIMER
 \*------------------------------------*/
 .timer {
+  position: absolute;
+  width: 100%;
+  margin-top: 54px;
+  font-size: 40px;
+  font-weight: 200;
   color: #fff;
+  text-align: center;
 }
 
 .time-list {
@@ -1562,11 +1616,75 @@ small, .milli {
 
 .time-label {
   display: none;
-  margin-bottom: 10px;
+  width: 57%;
+  padding: 10px;
+  margin: 30px auto 0;
+  color: #fff;
+  background-color: transparent;
+  border-top: 0;
+  border-right: 0;
+  border-bottom: 1px solid #777094;
+  border-left: 0;
+}
+
+.time-label.placeholder {
+  color: #f0eef9;
+}
+
+.time-label:-moz-placeholder {
+  color: #f0eef9;
+}
+
+.time-label::-moz-placeholder {
+  color: #f0eef9;
+}
+
+.time-label:-ms-input-placeholder {
+  color: #f0eef9;
+}
+
+.time-label::-webkit-input-placeholder {
+  color: #f0eef9;
+}
+
+.time-label:focus, .time-label:hover {
+  outline: 0;
 }
 
 .time-label--show {
   display: block;
+}
+
+/*------------------------------------*    $CONTROLS
+\*------------------------------------*/
+.controls {
+  margin: 40px auto 0;
+  text-align: center;
+}
+
+.controls button {
+  padding: 9px 15px;
+  margin-right: 9px;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  color: #f0eef9;
+  text-transform: uppercase;
+  cursor: pointer;
+  background-color: transparent;
+  border: 1px solid #777094;
+  transition: border-color 300ms ease, background-color 300ms ease, color 300ms ease;
+}
+
+.controls button:last-of-type {
+  margin-right: 0;
+}
+
+.controls button:hover, .controls button:focus {
+  color: #09061b;
+  background-color: #fff;
+  border-color: #09061b;
+  outline: 0;
 }
 
 /*------------------------------------*    $ORGANISMS

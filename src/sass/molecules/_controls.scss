@@ -1,0 +1,34 @@
+/*------------------------------------*\
+    $CONTROLS
+\*------------------------------------*/
+
+.controls {
+    margin: 40px auto 0;
+    text-align: center;
+
+    button {
+        padding: 9px 15px;
+        margin-right: 9px;
+        font-size: 12px;
+        font-weight: 400;
+        letter-spacing: 1px;
+        color: #f0eef9;
+        text-transform: uppercase;
+        cursor: pointer;
+        background-color: transparent;
+        border: 1px solid #777094;
+        transition: border-color $default-transition-speed ease, background-color $default-transition-speed ease, color $default-transition-speed ease;
+
+        &:last-of-type {
+            margin-right: 0;
+        }
+
+        &:hover,
+        &:focus {
+            color: #09061b;
+            background-color: #fff;
+            border-color: #09061b;
+            outline: 0;
+        }
+    }
+}

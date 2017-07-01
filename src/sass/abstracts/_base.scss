@@ -17,9 +17,8 @@ html {
 }
 
 body {
-    padding: 50px;
     overflow-x: hidden;
-    background-color: #131313;
+    color: #fff;
 }
 
 // Prevent empty space below images appearing
@@ -39,4 +38,7 @@ ol {
     padding: 0;
     margin: 0;
     list-style: none;
+}
+
+.app {
 }
