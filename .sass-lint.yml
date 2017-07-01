@@ -1,0 +1,64 @@
+#########################
+## Sample Sass Lint File
+#########################
+# Linter Options
+options:
+  # Don't merge default rules
+  # merge-default-rules: false
+  # Set the formatter to 'html'
+  # formatter: html
+  # Output file instead of logging results
+  # output-file: 'linters/sass-lint.html'
+# File Options
+files:
+  ignore:
+    - 'src/sass/vendor/**/*.*'
+    - 'src/sass/config/_grid.scss'
+    - 'src/sass/scaffolding.scss'
+#   include:
+#    - 'src/src/_source/sass/**/*.s+(a|c)ss'
+# Rule Configuration
+rules:
+  bem-depth:
+    - 1
+    - max-depth: 3
+  extends-before-mixins: 2
+  extends-before-declarations: 2
+  placeholder-in-extend: 2
+  empty-line-between-blocks:
+    - 2
+    - include: true
+  mixins-before-declarations:
+    - 2
+    - exclude:
+        - media-query
+  no-warn: 0
+  no-debug: 0
+  indentation:
+    - 1
+    - size: 4
+  variable-for-property:
+    - 0
+  no-css-comments: 0
+  class-name-format: 
+    - 1
+    - convention: hyphenatedbem
+  force-pseudo-nesting: 0
+  nesting-depth: 0
+  force-attribute-nesting: 0
+  force-element-nesting: 1
+  no-qualifying-elements: 0
+  leading-zero:
+    - 1
+    - include: true
+  no-vendor-prefixes:
+    - 1
+  mixin-name-format: 
+    - 1
+    - convention: hyphenatedlowercase
+  no-color-keywords: 0
+  no-color-literals: 0
+  property-sort-order:
+    - 1
+    -
+      order: recess

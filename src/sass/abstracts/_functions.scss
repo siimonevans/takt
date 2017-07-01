@@ -1,0 +1,19 @@
+/*------------------------------------*\
+    $FUNCTIONS
+\*------------------------------------*/
+
+
+/* ============================================
+    Strip the unit from the given value and return the value
+*/
+@function strip-unit($value) {
+    @return $value / ($value * 0 + 1);
+}
+
+
+/* ============================================
+    Return an em unit based on the pixel value and context
+*/
+@function rem($px, $context: $base-font-size) {
+    @return #{strip-unit($px / strip-unit($context))}rem;
+}

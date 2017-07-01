@@ -1,0 +1,71 @@
+/*------------------------------------*\
+    $TYPOGRAPHY
+\*------------------------------------*/
+
+
+/* ============================================
+    Base font
+*/
+html {
+    font-size: ($base-font-size / 16px) * 100%;
+    line-height: $base-line-height / $base-font-size;
+    color: $color--default;
+}
+
+
+/* ============================================
+    Families – one mixin per typeface
+    :: For each font mixin defined here, make sure each property is negated (set
+    :: to its default value, usually `inherit`) in all other font mixins.
+*/
+@mixin heading-text {
+    font-family: $font--primary;
+    font-style: inherit;
+    font-weight: inherit;
+}
+
+@mixin body-text {
+    font-family: $font--primary;
+    font-style: inherit;
+    font-weight: inherit;
+    text-transform: inherit;
+}
+
+@mixin quote-text {
+    font-family: $font--secondary;
+    font-style: italic;
+    font-weight: inherit;
+    text-transform: inherit;
+}
+
+// sass-lint:disable single-line-per-selector
+h1, h2, h3, h4, h5, h6,
+.heading-text {
+    @include heading-text;
+}
+// sass-lint:enddisable
+
+html,
+.body-text {
+    @include body-text;
+}
+
+blockquote {
+    @include quote-text;
+}
+
+
+/* ============================================
+    Default sizes
+*/
+h1, .alpha   { @include font-size(alpha); }
+h2, .beta    { @include font-size(beta); }
+h3, .gamma   { @include font-size(gamma); }
+h4, .delta   { @include font-size(delta); }
+h5, .epsilon { @include font-size(epsilon); }
+h6, .zeta    { @include font-size(zeta); }
+
+.giga { @include font-size(giga); }
+.mega { @include font-size(mega); }
+.kilo { @include font-size(kilo); }
+small, .milli { @include font-size(milli); }

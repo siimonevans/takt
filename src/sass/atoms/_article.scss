@@ -1,0 +1,29 @@
+/*------------------------------------*\
+    $ARTICLE
+    Default rich text styles
+\*------------------------------------*/
+
+.article {
+    ul {
+        margin-left: 40px;
+        list-style: disc;
+    }
+
+    ol {
+        margin-left: 40px;
+        list-style: decimal;
+    }
+
+    a {
+        color: #407f80;
+        transition: color $default-transition-speed ease;
+
+        &:hover {
+            color: #265454;
+        }
+    }
+
+    h1 {
+        margin-bottom: 10px;
+    }
+}

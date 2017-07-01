@@ -1,0 +1,6 @@
+dploy.yaml
+node_modules
+.sass-cache
+.tmp
+.DS_Store
+npm-debug.log
