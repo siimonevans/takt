@@ -17,10 +17,17 @@
     color: #fff;
 
     li {
-        padding: 5px 0;
+        padding: 15px;
         margin-bottom: 30px;
-        border-top: 1px solid #565656;
-        border-bottom: 1px solid #565656;
+        border-top: 1px solid #2c245a;
+        border-bottom: 1px solid #2c245a;
+
+        div {
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
     }
 }
 

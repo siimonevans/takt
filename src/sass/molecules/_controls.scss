@@ -29,14 +29,11 @@
             margin-right: 0;
         }
 
-        &:hover {
+        &:hover,
+        &:focus {
             color: #09061b;
             background-color: #fff;
             border-color: #09061b;
-            outline: 0;
-        }
-
-        &:focus {
             outline: 0;
         }
     }

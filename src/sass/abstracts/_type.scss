@@ -42,6 +42,7 @@ html {
 h1, h2, h3, h4, h5, h6,
 .heading-text {
     @include heading-text;
+    font-weight: 200;
 }
 // sass-lint:enddisable
 

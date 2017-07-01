@@ -1441,6 +1441,7 @@ h1, h2, h3, h4, h5, h6,
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   font-style: inherit;
   font-weight: inherit;
+  font-weight: 200;
 }
 
 html,
@@ -1547,7 +1548,7 @@ small, .milli {
   display: inline-block;
   width: 50%;
   height: 100vh;
-  padding: 50px;
+  padding: 50px 100px;
   vertical-align: top;
   background-color: #120d2f;
 }
@@ -1584,14 +1585,21 @@ small, .milli {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #09061b;
+  background-image: linear-gradient(45deg, #181023, #311952);
   border-radius: 50%;
   content: '';
+  opacity: 0.7;
+  transition: opacity 300ms ease;
 }
 
 .timer-wrapper--running {
+  background-image: linear-gradient(45deg, #181023, #311952);
   border-color: #d7bbff;
   box-shadow: 0 7px 50px 10px #5b3b86;
+}
+
+.timer-wrapper--running::before {
+  opacity: 1;
 }
 
 /*------------------------------------*    $TIMER
@@ -1612,10 +1620,17 @@ small, .milli {
 }
 
 .time-list li {
-  padding: 5px 0;
+  padding: 15px;
   margin-bottom: 30px;
-  border-top: 1px solid #565656;
-  border-bottom: 1px solid #565656;
+  border-top: 1px solid #2c245a;
+  border-bottom: 1px solid #2c245a;
+}
+
+.time-list li div {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 .time-label {
@@ -1690,14 +1705,10 @@ small, .milli {
   margin-right: 0;
 }
 
-.controls button:hover {
+.controls button:hover, .controls button:focus {
   color: #09061b;
   background-color: #fff;
   border-color: #09061b;
-  outline: 0;
-}
-
-.controls button:focus {
   outline: 0;
 }
 
