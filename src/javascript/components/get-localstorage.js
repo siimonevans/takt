@@ -3,11 +3,19 @@ import $ from '../globals';
 function getLocalStorage() {
 
     function getData() {
-        var data = JSON.parse(localStorage.getItem('storageString'));
-
-        var arrayLength = data.length;
+        const data = JSON.parse(localStorage.getItem('storageString'));
+        const arrayLength = data.length;
+        
         for (var i = 0; i < arrayLength; i++) {
-            $('.time-list').append('<li><div>title: ' + data[i].title + '</div><div>time: ' + data[i].time + '</div></li>');
+            let totalTime = (data[i].time).split(':');
+            let minutes = totalTime[0];
+            let seconds = totalTime[1];
+
+            if ( minutes == 0 ) {
+                $('.time-list').append('<li><div>Task name: ' + data[i].title + '</div><div>Task duration: '+ seconds +' seconds</div></li>');
+            } else {
+                $('.time-list').append('<li><div>Task name: ' + data[i].title + '</div><div>Task duration: '+ minutes +' minutes and '+ seconds +' seconds</div></li>');
+            }
         }
     }
 

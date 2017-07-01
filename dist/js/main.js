@@ -2296,7 +2296,15 @@ function stopwatch() {
                 var arrayLength = data.length;
 
                 for (var i = 0; i < arrayLength; i++) {
-                    jquery('.time-list').append('<li><div>title: ' + data[i].title + '</div><div>time: ' + data[i].time + '</div></li>');
+                    var totalTime = data[i].time.split(':');
+                    var _minutes = totalTime[0];
+                    var _seconds = totalTime[1];
+
+                    if (_minutes == 0) {
+                        jquery('.time-list').append('<li><div>Task name: ' + data[i].title + '</div><div>Task duration: ' + _seconds + ' seconds</div></li>');
+                    } else {
+                        jquery('.time-list').append('<li><div>Task name: ' + data[i].title + '</div><div>Task duration: ' + _minutes + ' minutes and ' + _seconds + ' seconds</div></li>');
+                    }
                 }
             }
         }
@@ -2343,10 +2351,18 @@ function getLocalStorage() {
 
     function getData() {
         var data = JSON.parse(localStorage.getItem('storageString'));
-
         var arrayLength = data.length;
+
         for (var i = 0; i < arrayLength; i++) {
-            jquery('.time-list').append('<li><div>title: ' + data[i].title + '</div><div>time: ' + data[i].time + '</div></li>');
+            var totalTime = data[i].time.split(':');
+            var minutes = totalTime[0];
+            var seconds = totalTime[1];
+
+            if (minutes == 0) {
+                jquery('.time-list').append('<li><div>Task name: ' + data[i].title + '</div><div>Task duration: ' + seconds + ' seconds</div></li>');
+            } else {
+                jquery('.time-list').append('<li><div>Task name: ' + data[i].title + '</div><div>Task duration: ' + minutes + ' minutes and ' + seconds + ' seconds</div></li>');
+            }
         }
     }
 
