@@ -10,3 +10,9 @@
     vertical-align: top;
     background-color: #120d2f;
 }
+
+.current-task {
+    &__heading {
+        display: none;
+    }
+}

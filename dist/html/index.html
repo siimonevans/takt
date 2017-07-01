@@ -11,6 +11,11 @@
   <body>
     <div class="app">
       <div class="task-area">
+        <div class="current-task">
+          <h4 class="current-task__heading">Currently running task:</h4>
+          <div class="current-task__data"></div>
+        </div>
+        <h4>Completed tasks:</h4>
         <ul class="time-list"></ul>
       </div><!--
       --><div class="timer-area">
@@ -21,12 +26,14 @@
           </div>
         </div>
         <div class="controls">
-          <button data-action="start">Start</button>
-          <button data-action="stop">Stop</button>
-          <button data-action="save">Save</button>
-          <button data-action="reset">Reset</button>
-          <button data-action="clear-all">Clear</button>
-          <input type="text" class="time-label" placeholder="Task name&hellip;">
+          <button data-action="start" class="start">Start</button>
+          <button data-action="stop" class="stop">Pause</button>
+          <button data-action="save" class="finish">Finish</button>
+          <button data-action="reset" class="cancel">Cancel</button>
+          <button data-action="clear-all" class="clear">Clear all tasks</button>
+          <form>
+            <input type="text" class="time-label" placeholder="Task name&hellip;">
+          </form>
         </div>
       </div>
     </div>

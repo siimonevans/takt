@@ -6,6 +6,12 @@
     margin: 40px auto 0;
     text-align: center;
 
+    .stop,
+    .finish,
+    .cancel {
+        display: none;
+    }
+
     button {
         padding: 9px 15px;
         margin-right: 9px;
@@ -23,12 +29,23 @@
             margin-right: 0;
         }
 
-        &:hover,
-        &:focus {
+        &:hover {
             color: #09061b;
             background-color: #fff;
             border-color: #09061b;
             outline: 0;
+        }
+
+        &:focus {
+            outline: 0;
+        }
+    }
+
+    &--running {
+        .stop,
+        .finish,
+        .cancel {
+            display: inline-block;
         }
     }
 }

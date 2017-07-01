@@ -22,6 +22,7 @@ function stopwatch() {
                 interval = setInterval(incrementTimer, 1000);
             }
 
+            $('.controls').addClass('controls--running');
             $('.time-label').addClass('time-label--show');
             $('.timer-wrapper').addClass('timer-wrapper--running');
         }
@@ -29,11 +30,13 @@ function stopwatch() {
         function stopTimer() {
             isRunning = false;
             clearInterval(interval);
+
             $('.timer-wrapper').removeClass('timer-wrapper--running');
         }
 
         function resetTimer() {
             stopTimer();
+            resetUI();
             timerTime = 0;
             seconds.innerText = '00';
             minutes.innerText = '00';
@@ -62,6 +65,9 @@ function stopwatch() {
         function resetUI() {
             $('.time-label').val('');
             $('.time-label').removeClass('time-label--show');
+            $('.current-task__data').html('');
+            $('.current-task__heading').hide();
+            $('.controls').removeClass('controls--running');
         }
 
         // Update UI
@@ -113,6 +119,12 @@ function stopwatch() {
         $resetButton.addEventListener('click', resetTimer);
         $saveButton.addEventListener('click', saveTimer);
         $clearButton.addEventListener('click', clearData);
+
+        $('form').on('submit', function(e) {
+            e.preventDefault();
+            $('.current-task__heading').show();
+            $('.current-task__data').html('<div>' + $('.time-label').val() + '</div>');
+        });
     }
 
     function bindEvents() {

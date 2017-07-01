@@ -1552,6 +1552,10 @@ small, .milli {
   background-color: #120d2f;
 }
 
+.current-task__heading {
+  display: none;
+}
+
 /*------------------------------------*    $TIMER AREA
 \*------------------------------------*/
 .timer-area {
@@ -1662,6 +1666,12 @@ small, .milli {
   text-align: center;
 }
 
+.controls .stop,
+.controls .finish,
+.controls .cancel {
+  display: none;
+}
+
 .controls button {
   padding: 9px 15px;
   margin-right: 9px;
@@ -1680,11 +1690,21 @@ small, .milli {
   margin-right: 0;
 }
 
-.controls button:hover, .controls button:focus {
+.controls button:hover {
   color: #09061b;
   background-color: #fff;
   border-color: #09061b;
   outline: 0;
+}
+
+.controls button:focus {
+  outline: 0;
+}
+
+.controls--running .stop,
+.controls--running .finish,
+.controls--running .cancel {
+  display: inline-block;
 }
 
 /*------------------------------------*    $ORGANISMS

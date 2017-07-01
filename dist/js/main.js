@@ -2250,6 +2250,7 @@ function stopwatch() {
                 interval = setInterval(incrementTimer, 1000);
             }
 
+            jquery('.controls').addClass('controls--running');
             jquery('.time-label').addClass('time-label--show');
             jquery('.timer-wrapper').addClass('timer-wrapper--running');
         }
@@ -2257,11 +2258,13 @@ function stopwatch() {
         function stopTimer() {
             isRunning = false;
             clearInterval(interval);
+
             jquery('.timer-wrapper').removeClass('timer-wrapper--running');
         }
 
         function resetTimer() {
             stopTimer();
+            resetUI();
             timerTime = 0;
             seconds.innerText = '00';
             minutes.innerText = '00';
@@ -2290,6 +2293,9 @@ function stopwatch() {
         function resetUI() {
             jquery('.time-label').val('');
             jquery('.time-label').removeClass('time-label--show');
+            jquery('.current-task__data').html('');
+            jquery('.current-task__heading').hide();
+            jquery('.controls').removeClass('controls--running');
         }
 
         // Update UI
@@ -2341,6 +2347,12 @@ function stopwatch() {
         $resetButton.addEventListener('click', resetTimer);
         $saveButton.addEventListener('click', saveTimer);
         $clearButton.addEventListener('click', clearData);
+
+        jquery('form').on('submit', function (e) {
+            e.preventDefault();
+            jquery('.current-task__heading').show();
+            jquery('.current-task__data').html('<div>' + jquery('.time-label').val() + '</div>');
+        });
     }
 
     function bindEvents() {
