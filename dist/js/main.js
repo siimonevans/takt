@@ -2240,7 +2240,7 @@ function stopwatch() {
             seconds = document.querySelector('.seconds');
 
         var timerTime = 0,
-            interval = void 0,
+            interval = null,
             isRunning = false;
 
         function startTimer() {
@@ -2262,29 +2262,32 @@ function stopwatch() {
             minutes.innerText = '00';
         }
 
-        function saveTimer() {
+        // Add to localStorage
+        function addStoredItem(title, time) {
+            var existingItems = JSON.parse(localStorage.getItem('storageString')) || [];
 
-            var numOfMinutes = Math.floor(timerTime / 60),
-                numOfSeconds = timerTime % 60;
+            var newItem = {
+                'title': name,
+                'time': time
+            };
 
-            var totalTime = '' + numOfMinutes + ' : ' + numOfSeconds;
+            existingItems.push(newItem);
+            localStorage.setItem('storageString', JSON.stringify(existingItems));
+        }
 
-            function addItem(title, time) {
-                var oldItems = JSON.parse(localStorage.getItem('storageString')) || [];
-
-                var newItem = {
-                    'title': name,
-                    'time': time
-                };
-
-                oldItems.push(newItem);
-
-                localStorage.setItem('storageString', JSON.stringify(oldItems));
-            }
-
-            console.log(JSON.parse(localStorage.getItem('storageString')));
-            addItem('time', totalTime);
+        // Update UI
+        function updateTimeList() {
             jquery('.time-list').text(localStorage.getItem(localStorage.key('storageString')));
+        }
+
+        // Save time value
+        function saveTimer() {
+            var numOfMinutes = Math.floor(timerTime / 60),
+                numOfSeconds = timerTime % 60,
+                totalTime = '' + numOfMinutes + ':' + numOfSeconds;
+
+            addStoredItem('time', totalTime);
+            updateTimeList();
             resetTimer();
         }
 
@@ -2293,7 +2296,6 @@ function stopwatch() {
                 numOfSeconds = timerTime % 60;
 
             timerTime = timerTime + 1;
-
             seconds.innerText = numOfSeconds >= 10 ? numOfSeconds : '0' + numOfSeconds;
             minutes.innerText = numOfMinutes >= 10 ? numOfMinutes : '0' + numOfMinutes;
         }
