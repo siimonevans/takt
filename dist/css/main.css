@@ -1549,7 +1549,15 @@ small, .milli {
 }
 
 .time-list {
+  margin-top: 30px;
   color: #fff;
+}
+
+.time-list li {
+  padding: 5px 0;
+  margin-bottom: 30px;
+  border-top: 1px solid #565656;
+  border-bottom: 1px solid #565656;
 }
 
 /*------------------------------------*    $ORGANISMS
