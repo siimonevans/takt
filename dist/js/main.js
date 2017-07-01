@@ -2226,37 +2226,110 @@ var jquery = createCommonjsModule(function (module) {
   });
 });
 
-// We have to manually make jQuery a global variable.
-// By default it will be in a closure and renamed to lowercase.
 window.jQuery = jquery;
 
-function jsDemo() {
+function stopwatch() {
 
-    var $testVar = 'JavaScript is working';
+    function timer() {
 
-    function jQueryCheck() {
-        if (window.jQuery) {
-            console.log('jQuery is available');
+        var $startButton = document.querySelector('[data-action="start"]'),
+            $stopButton = document.querySelector('[data-action="stop"]'),
+            $resetButton = document.querySelector('[data-action="reset"]'),
+            $saveButton = document.querySelector('[data-action="save"]'),
+            minutes = document.querySelector('.minutes'),
+            seconds = document.querySelector('.seconds');
+
+        var timerTime = 0,
+            interval = void 0,
+            isRunning = false;
+
+        function startTimer() {
+            if (!isRunning) {
+                isRunning = true;
+                interval = setInterval(incrementTimer, 1000);
+            }
         }
+
+        function stopTimer() {
+            isRunning = false;
+            clearInterval(interval);
+        }
+
+        function resetTimer() {
+            stopTimer();
+            timerTime = 0;
+            seconds.innerText = '00';
+            minutes.innerText = '00';
+        }
+
+        function saveTimer() {
+
+            var numOfMinutes = Math.floor(timerTime / 60),
+                numOfSeconds = timerTime % 60;
+
+            var totalTime = '' + numOfMinutes + ' : ' + numOfSeconds;
+
+            function addItem(title, time) {
+                var oldItems = JSON.parse(localStorage.getItem('storageString')) || [];
+
+                var newItem = {
+                    'title': name,
+                    'time': time
+                };
+
+                oldItems.push(newItem);
+
+                localStorage.setItem('storageString', JSON.stringify(oldItems));
+            }
+
+            console.log(JSON.parse(localStorage.getItem('storageString')));
+            addItem('time', totalTime);
+            jquery('.time-list').text(localStorage.getItem(localStorage.key('storageString')));
+            resetTimer();
+        }
+
+        function incrementTimer() {
+            var numOfMinutes = Math.floor(timerTime / 60),
+                numOfSeconds = timerTime % 60;
+
+            timerTime = timerTime + 1;
+
+            seconds.innerText = numOfSeconds >= 10 ? numOfSeconds : '0' + numOfSeconds;
+            minutes.innerText = numOfMinutes >= 10 ? numOfMinutes : '0' + numOfMinutes;
+        }
+
+        $startButton.addEventListener('click', startTimer);
+        $stopButton.addEventListener('click', stopTimer);
+        $resetButton.addEventListener('click', resetTimer);
+        $saveButton.addEventListener('click', saveTimer);
     }
 
     function bindEvents() {
-
-        // Check for JS
         jquery(window).on('load', function () {
-            console.log($testVar);
-        });
-
-        // Check for jQuery
-        jquery(window).on('load', function () {
-            return jQueryCheck();
+            return timer();
         });
     }
 
     bindEvents();
 }
 
-jsDemo();
+function getLocalStorage() {
+
+    function getData() {
+        jquery('.time-list').text(localStorage.getItem(localStorage.key('storageString')));
+    }
+
+    function bindEvents() {
+        jquery(window).on('load', function () {
+            return getData();
+        });
+    }
+
+    bindEvents();
+}
+
+stopwatch();
+getLocalStorage();
 
 })));
 //# sourceMappingURL=main.js.map

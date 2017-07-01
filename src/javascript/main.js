@@ -1,3 +1,5 @@
-import jsDemo from './components/js-demo';
+import stopwatch from './components/stopwatch';
+import getLocalStorage from './components/get-localstorage';
 
-jsDemo();
+stopwatch();
+getLocalStorage();
