@@ -16,5 +16,13 @@
         border-top: 1px solid #565656;
         border-bottom: 1px solid #565656;
     }
+}
 
+.time-label {
+    display: none;
+    margin-bottom: 10px;
+
+    &--show {
+        display: block;
+    }
 }

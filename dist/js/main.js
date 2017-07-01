@@ -2249,6 +2249,8 @@ function stopwatch() {
                 isRunning = true;
                 interval = setInterval(incrementTimer, 1000);
             }
+
+            jquery('.time-label').addClass('time-label--show');
         }
 
         function stopTimer() {
@@ -2285,6 +2287,7 @@ function stopwatch() {
         // Reset UI
         function resetUI() {
             jquery('.time-label').val('');
+            jquery('.time-label').removeClass('time-label--show');
         }
 
         // Update UI
