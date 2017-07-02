@@ -61,6 +61,22 @@ function stopwatch() {
             localStorage.setItem('storageString', JSON.stringify(existingItems));
         }
 
+        // Remove items
+        function deleteItem(item) {
+            const data = JSON.parse(localStorage.getItem('storageString')),
+                clickedItem = item.attr('data-name');
+
+            $.each(data, function(i){
+                if(data[i].title == clickedItem) {
+                    data.splice(i,1);
+                    localStorage.setItem('storageString', JSON.stringify(data));
+                    return false;
+                }
+            });
+
+            updateTimeList();
+        }
+
         // Reset UI
         function resetUI() {
             $('.time-label').val('');
@@ -84,9 +100,9 @@ function stopwatch() {
                     let seconds = totalTime[1];
 
                     if ( minutes == 0 ) {
-                        $('.time-list').append('<li><div>Task name: ' + data[i].title + '</div><div>Task duration: '+ seconds +' seconds</div></li>');
+                        $('.time-list').append('<li><button data-name="'+ data[i].title +'">Delete</button><div>Task name: ' + data[i].title + '</div><div>Task duration: '+ seconds +' seconds</div></li>');
                     } else {
-                        $('.time-list').append('<li><div>Task name: ' + data[i].title + '</div><div>Task duration: '+ minutes +' minutes and '+ seconds +' seconds</div></li>');
+                        $('.time-list').append('<li><button data-name="'+ data[i].title +'">Delete</button><div>Task name: ' + data[i].title + '</div><div>Task duration: '+ minutes +' minutes and '+ seconds +' seconds</div></li>');
                     }
                 }
             }
@@ -124,6 +140,11 @@ function stopwatch() {
             e.preventDefault();
             $('.current-task__heading').show();
             $('.current-task__data').html('<div>' + $('.time-label').val() + '</div>');
+        });
+
+        $('body').on('click', '.time-list li button', function () {
+            var item = $(this);
+            deleteItem(item);
         });
     }
 

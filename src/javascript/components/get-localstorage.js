@@ -12,9 +12,9 @@ function getLocalStorage() {
             let seconds = totalTime[1];
 
             if ( minutes == 0 ) {
-                $('.time-list').append('<li><div>Task name: ' + data[i].title + '</div><div>Task duration: '+ seconds +' seconds</div></li>');
+                $('.time-list').append('<li><button data-name="'+ data[i].title +'">Delete</button><div>Task name: ' + data[i].title + '</div><div>Task duration: '+ seconds +' seconds</div></li>');
             } else {
-                $('.time-list').append('<li><div>Task name: ' + data[i].title + '</div><div>Task duration: '+ minutes +' minutes and '+ seconds +' seconds</div></li>');
+                $('.time-list').append('<li><button data-name="'+ data[i].title +'">Delete</button><div>Task name: ' + data[i].title + '</div><div>Task duration: '+ minutes +' minutes and '+ seconds +' seconds</div></li>');
             }
         }
     }

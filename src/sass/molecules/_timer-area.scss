@@ -18,8 +18,9 @@
     margin: 0 auto;
     border: 8px solid #9581b1;
     border-radius: 50%;
+    opacity: 0.5;
     box-shadow: 0 3px 25px 5px #33204c;
-    transition: border-color $default-transition-speed ease, box-shadow $default-transition-speed ease;
+    transition: border-color $default-transition-speed ease, box-shadow $default-transition-speed ease, opacity $default-transition-speed ease;
 
     &::before {
         position: absolute;
@@ -37,6 +38,7 @@
     &--running {
         background-image: linear-gradient(45deg, #181023, #311952);
         border-color: #d7bbff;
+        opacity: 1;
         box-shadow: 0 7px 50px 10px #5b3b86;
 
         &::before {

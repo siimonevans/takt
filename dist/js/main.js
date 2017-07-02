@@ -2289,6 +2289,22 @@ function stopwatch() {
             localStorage.setItem('storageString', JSON.stringify(existingItems));
         }
 
+        // Remove items
+        function deleteItem(item) {
+            var data = JSON.parse(localStorage.getItem('storageString')),
+                clickedItem = item.attr('data-name');
+
+            jquery.each(data, function (i) {
+                if (data[i].title == clickedItem) {
+                    data.splice(i, 1);
+                    localStorage.setItem('storageString', JSON.stringify(data));
+                    return false;
+                }
+            });
+
+            updateTimeList();
+        }
+
         // Reset UI
         function resetUI() {
             jquery('.time-label').val('');
@@ -2312,9 +2328,9 @@ function stopwatch() {
                     var _seconds = totalTime[1];
 
                     if (_minutes == 0) {
-                        jquery('.time-list').append('<li><div>Task name: ' + data[i].title + '</div><div>Task duration: ' + _seconds + ' seconds</div></li>');
+                        jquery('.time-list').append('<li><button data-name="' + data[i].title + '">Delete</button><div>Task name: ' + data[i].title + '</div><div>Task duration: ' + _seconds + ' seconds</div></li>');
                     } else {
-                        jquery('.time-list').append('<li><div>Task name: ' + data[i].title + '</div><div>Task duration: ' + _minutes + ' minutes and ' + _seconds + ' seconds</div></li>');
+                        jquery('.time-list').append('<li><button data-name="' + data[i].title + '">Delete</button><div>Task name: ' + data[i].title + '</div><div>Task duration: ' + _minutes + ' minutes and ' + _seconds + ' seconds</div></li>');
                     }
                 }
             }
@@ -2353,6 +2369,11 @@ function stopwatch() {
             jquery('.current-task__heading').show();
             jquery('.current-task__data').html('<div>' + jquery('.time-label').val() + '</div>');
         });
+
+        jquery('body').on('click', '.time-list li button', function () {
+            var item = jquery(this);
+            deleteItem(item);
+        });
     }
 
     function bindEvents() {
@@ -2376,9 +2397,9 @@ function getLocalStorage() {
             var seconds = totalTime[1];
 
             if (minutes == 0) {
-                jquery('.time-list').append('<li><div>Task name: ' + data[i].title + '</div><div>Task duration: ' + seconds + ' seconds</div></li>');
+                jquery('.time-list').append('<li><button data-name="' + data[i].title + '">Delete</button><div>Task name: ' + data[i].title + '</div><div>Task duration: ' + seconds + ' seconds</div></li>');
             } else {
-                jquery('.time-list').append('<li><div>Task name: ' + data[i].title + '</div><div>Task duration: ' + minutes + ' minutes and ' + seconds + ' seconds</div></li>');
+                jquery('.time-list').append('<li><button data-name="' + data[i].title + '">Delete</button><div>Task name: ' + data[i].title + '</div><div>Task duration: ' + minutes + ' minutes and ' + seconds + ' seconds</div></li>');
             }
         }
     }
