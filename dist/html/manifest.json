@@ -12,6 +12,11 @@
       "src": "images/favicon/mstile-310x310.png",
       "sizes": "310x310",
       "type": "image/png"
+    },
+    {
+      "src": "images/favicon/favicon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
     }
   ]
 }
