@@ -6,12 +6,7 @@ import commonjs from 'rollup-plugin-commonjs'; // uses UglifyJS2, and works with
 import uglify from 'rollup-plugin-uglify'; // plugins to display the original size of each import, and the final size of the bundle
 import sizes from 'rollup-plugin-sizes';
 import filesize from 'rollup-plugin-filesize';
-// Could do multiple entries
-// const entries = [
-//     'client/scripts/main.js',
-//     'client/scripts/example.js'
-// ];
-// entry: `site/javascript/${entries}`,
+
 // Create default config object
 let config = {
     entry       : `${process.env.npm_package_config_src_js}/${process.env.entry}`,
