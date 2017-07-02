@@ -2323,7 +2323,7 @@ function stopwatch() {
         function updateTimeList() {
             jquery('.time-list').html('');
 
-            if (localStorage.getItem('storageString').length) {
+            if (localStorage.getItem('storageString')) {
                 var data = JSON.parse(localStorage.getItem('storageString'));
                 var arrayLength = data.length;
 
@@ -2338,6 +2338,12 @@ function stopwatch() {
                         jquery('.time-list').append('<li><button data-name="' + data[i].title + '"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task duration: <span>' + _minutes + ' minutes and ' + _seconds + ' seconds</span></div></li>');
                     }
                 }
+
+                jquery('.task-area .completed-tasks').text('Completed tasks:');
+                jquery('.button.create').show();
+            } else {
+                jquery('.task-area .completed-tasks').text('No existing tasks');
+                jquery('.button.create').hide();
             }
         }
 
@@ -2412,19 +2418,29 @@ function stopwatch() {
 function getLocalStorage() {
 
     function getData() {
-        var data = JSON.parse(localStorage.getItem('storageString'));
-        var arrayLength = data.length;
 
-        for (var i = 0; i < arrayLength; i++) {
-            var totalTime = data[i].time.split(':');
-            var minutes = totalTime[0];
-            var seconds = totalTime[1];
+        if (localStorage.getItem('storageString')) {
+            var data = JSON.parse(localStorage.getItem('storageString'));
+            var arrayLength = data.length;
 
-            if (minutes == 0) {
-                jquery('.time-list').append('<li><button data-name="' + data[i].title + '"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task duration: <span>' + seconds + ' seconds</span></div></li>');
-            } else {
-                jquery('.time-list').append('<li><button data-name="' + data[i].title + '"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task duration: <span>' + minutes + ' minutes and ' + seconds + ' seconds</span></div></li>');
+            if (arrayLength !== 0) {
+                for (var i = 0; i < arrayLength; i++) {
+                    var totalTime = data[i].time.split(':');
+                    var minutes = totalTime[0];
+                    var seconds = totalTime[1];
+
+                    if (minutes == 0) {
+                        jquery('.time-list').append('<li><button data-name="' + data[i].title + '"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task duration: <span>' + seconds + ' seconds</span></div></li>');
+                    } else {
+                        jquery('.time-list').append('<li><button data-name="' + data[i].title + '"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task duration: <span>' + minutes + ' minutes and ' + seconds + ' seconds</span></div></li>');
+                    }
+                }
+
+                jquery('.task-area .completed-tasks').text('Completed tasks:');
+                jquery('.button.create').show();
             }
+        } else {
+            jquery('.task-area .completed-tasks').text('No existing tasks');
         }
     }
 

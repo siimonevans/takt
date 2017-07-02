@@ -95,7 +95,7 @@ function stopwatch() {
         function updateTimeList() {
             $('.time-list').html('');
 
-            if (localStorage.getItem('storageString').length) {
+            if (localStorage.getItem('storageString')) {
                 const data = JSON.parse(localStorage.getItem('storageString'));
                 const arrayLength = data.length;
 
@@ -110,6 +110,12 @@ function stopwatch() {
                         $('.time-list').append('<li><button data-name="'+ data[i].title +'"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task duration: <span>'+ minutes +' minutes and '+ seconds +' seconds</span></div></li>');
                     }
                 }
+
+                $('.task-area .completed-tasks').text('Completed tasks:');
+                $('.button.create').show();
+            } else {
+                $('.task-area .completed-tasks').text('No existing tasks');
+                $('.button.create').hide();
             }
         }
 
