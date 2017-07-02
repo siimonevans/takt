@@ -12,6 +12,7 @@ self.addEventListener('install', function(event) {
       return cache.addAll([
         '/',
         'index.html',
+        'timesheet.html',
         'js/main.js',
         'css/main.css',
         'images/bin.svg'
