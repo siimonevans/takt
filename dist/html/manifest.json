@@ -1,0 +1,17 @@
+{
+  "short_name": "Tempo",
+  "name": "Tempo",
+  "description" : "Time tracking",
+  "display": "standalone",
+  "orientation": "portrait",
+  "start_url": "index.html",
+  "theme_color": "#120d2f",
+  "background_color": "#120d2f",
+  "icons": [
+    {
+      "src": "images/favicon/mstile-310x310.png",
+      "sizes": "310x310",
+      "type": "image/png"
+    }
+  ]
+}
