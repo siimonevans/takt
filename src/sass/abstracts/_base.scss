@@ -19,6 +19,7 @@ html {
 body {
     overflow-x: hidden;
     color: #fff;
+    background-color: #09061b;
 }
 
 // Prevent empty space below images appearing
@@ -41,7 +42,15 @@ ol {
 }
 
 a {
-    color: #fff;
     font-size: 14px;
     font-weight: 300;
+    color: #fff;
+}
+
+.app {
+    display: flex;
+
+    @include media-query(tablet) {
+        display: block;
+    }
 }

@@ -6,7 +6,7 @@
     position: relative;
     display: inline-block;
     padding: 9px 15px;
-    margin-right: 9px;
+    margin: 0 10px 10px 0;
     font-size: 12px;
     font-weight: 400;
     letter-spacing: 1px;
@@ -24,5 +24,10 @@
         background-color: #fff;
         border-color: #09061b;
         outline: 0;
+    }
+
+    @include media-query(mobile) {
+        width: 100%;
+        margin-right: 0;
     }
 }

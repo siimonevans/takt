@@ -86,4 +86,9 @@
     &--show {
         display: block;
     }
+
+    @include media-query(mobile) {
+        width: 100%;
+        margin-top: 10px;
+    }
 }

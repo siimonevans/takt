@@ -3,12 +3,24 @@
 \*------------------------------------*/
 
 .task-area {
-    display: inline-block;
     width: 50%;
     height: 100vh;
     padding: 50px 100px;
-    vertical-align: top;
+    overflow: scroll;
     background-color: #120d2f;
+
+    @include media-query(laptop) {
+        padding: 0 30px 30px;
+    }
+
+    @include media-query(tablet) {
+        width: 100%;
+        height: auto;
+    }
+
+    .create {
+        display: none;
+    }
 }
 
 .current-task {

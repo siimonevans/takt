@@ -935,7 +935,7 @@ textarea {
   }
 }
 
-@media only screen and (max-width: 1100px) {
+@media only screen and (max-width: 1200px) {
   /**
      * Whole
      */
@@ -1037,7 +1037,7 @@ textarea {
   }
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 1000px) {
   /**
      * Whole
      */
@@ -1139,7 +1139,7 @@ textarea {
   }
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 700px) {
   /**
      * Whole
      */
@@ -1402,6 +1402,7 @@ html {
 body {
   overflow-x: hidden;
   color: #fff;
+  background-color: #09061b;
 }
 
 img,
@@ -1421,9 +1422,19 @@ ol {
 }
 
 a {
-  color: #fff;
   font-size: 14px;
   font-weight: 300;
+  color: #fff;
+}
+
+.app {
+  display: flex;
+}
+
+@media only screen and (max-width: 700px) {
+  .app {
+    display: block;
+  }
 }
 
 /*------------------------------------*    $TYPOGRAPHY
@@ -1552,7 +1563,7 @@ small, .milli {
   position: relative;
   display: inline-block;
   padding: 9px 15px;
-  margin-right: 9px;
+  margin: 0 10px 10px 0;
   font-size: 12px;
   font-weight: 400;
   letter-spacing: 1px;
@@ -1572,17 +1583,40 @@ small, .milli {
   outline: 0;
 }
 
+@media only screen and (max-width: 650px) {
+  .button {
+    width: 100%;
+    margin-right: 0;
+  }
+}
+
 /*------------------------------------*    $MOLECULES
 \*------------------------------------*/
 /*------------------------------------*    $TASK AREA
 \*------------------------------------*/
 .task-area {
-  display: inline-block;
   width: 50%;
   height: 100vh;
   padding: 50px 100px;
-  vertical-align: top;
+  overflow: scroll;
   background-color: #120d2f;
+}
+
+@media only screen and (max-width: 1000px) {
+  .task-area {
+    padding: 0 30px 30px;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .task-area {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.task-area .create {
+  display: none;
 }
 
 .current-task__heading {
@@ -1592,12 +1626,23 @@ small, .milli {
 /*------------------------------------*    $TIMER AREA
 \*------------------------------------*/
 .timer-area {
-  display: inline-block;
   width: 50%;
   height: 100vh;
   padding-top: 100px;
-  vertical-align: top;
   background-color: #09061b;
+}
+
+@media only screen and (max-width: 1000px) {
+  .timer-area {
+    padding: 40px 30px;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .timer-area {
+    width: 100%;
+    height: auto;
+  }
 }
 
 .timer-wrapper {
@@ -1734,6 +1779,13 @@ small, .milli {
 
 .task-label--show {
   display: block;
+}
+
+@media only screen and (max-width: 650px) {
+  .task-label {
+    width: 100%;
+    margin-top: 10px;
+  }
 }
 
 /*------------------------------------*    $CONTROLS

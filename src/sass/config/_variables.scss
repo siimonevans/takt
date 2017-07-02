@@ -83,9 +83,9 @@ $gutter: 40px;
 */
 $breakpoints: (
     'wide'          '(max-width: 1440px)',
-    'desktop'       '(max-width: 1100px)',
-    'laptop'        '(max-width: 900px)',
-    'tablet'        '(max-width: 800px)',
+    'desktop'       '(max-width: 1200px)',
+    'laptop'        '(max-width: 1000px)',
+    'tablet'        '(max-width: 700px)',
     'mobile'        '(max-width: 650px)',
 );
 

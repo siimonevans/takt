@@ -3,12 +3,19 @@
 \*------------------------------------*/
 
 .timer-area {
-    display: inline-block;
     width: 50%;
     height: 100vh;
     padding-top: 100px;
-    vertical-align: top;
     background-color: #09061b;
+
+    @include media-query(laptop) {
+        padding: 40px 30px;
+    }
+
+    @include media-query(tablet) {
+        width: 100%;
+        height: auto;
+    }
 }
 
 .timer-wrapper {
