@@ -2253,6 +2253,8 @@ function stopwatch() {
             if (!isRunning) {
                 isRunning = true;
                 interval = setInterval(incrementTimer, 1000);
+                $taskLabel.focus();
+                jquery('.loader').removeClass('loader--paused');
             }
 
             $controls.addClass('controls--running');
@@ -2264,6 +2266,7 @@ function stopwatch() {
             isRunning = false;
             clearInterval(interval);
             $timerWrapper.removeClass('timer-wrapper--running');
+            jquery('.loader').addClass('loader--paused');
         }
 
         function resetTimer() {
@@ -2342,9 +2345,11 @@ function stopwatch() {
 
                 jquery('.task-area .completed-tasks').text('Completed tasks:');
                 jquery('.button.create').show();
+                jquery('.time-list-meta').addClass('time-list-meta--show');
             } else {
-                jquery('.task-area .completed-tasks').text('No existing tasks');
+                jquery('.task-area .completed-tasks').text('No completed tasks');
                 jquery('.button.create').hide();
+                jquery('.time-list-meta').removeClass('time-list-meta--show');
             }
         }
 
@@ -2423,9 +2428,11 @@ function getLocalStorage() {
 
                 jquery('.task-area .completed-tasks').text('Completed tasks:');
                 jquery('.button.create').show();
+                jquery('.time-list-meta').addClass('time-list-meta--show');
             }
         } else {
-            jquery('.task-area .completed-tasks').text('No existing tasks');
+            jquery('.task-area .completed-tasks').text('No completed tasks');
+            jquery('.time-list-meta').removeClass('time-list-meta--show');
         }
     }
 

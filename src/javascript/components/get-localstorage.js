@@ -23,9 +23,11 @@ function getLocalStorage() {
                 
                 $('.task-area .completed-tasks').text('Completed tasks:');
                 $('.button.create').show();
+                $('.time-list-meta').addClass('time-list-meta--show');
             }
         } else {
-            $('.task-area .completed-tasks').text('No existing tasks');
+            $('.task-area .completed-tasks').text('No completed tasks');
+            $('.time-list-meta').removeClass('time-list-meta--show');
         }
     }
 

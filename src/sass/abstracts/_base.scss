@@ -56,6 +56,9 @@ a {
 
     &--timesheet {
         display: block;
-        padding: 0 20px 20px;
+        height: 100vh;
+        padding: 30px 50px;
+        overflow: scroll;
+        background-color: #120d2f;
     }
 }

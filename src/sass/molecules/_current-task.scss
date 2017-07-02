@@ -14,6 +14,10 @@
         font-size: 14px;
         font-weight: 300;
         border: 1px solid #2c245a;
+
+        div {
+            margin-bottom: 5px;
+        }
     }
 
     &__in-progress {
@@ -38,6 +42,10 @@
                 width: 25px;
                 height: 25px;
                 border-radius: 50%;
+            }
+
+            &--paused {
+                animation: none;
             }
         }
 

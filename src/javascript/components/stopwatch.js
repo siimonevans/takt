@@ -25,6 +25,8 @@ function stopwatch() {
             if (!isRunning) {
                 isRunning = true;
                 interval = setInterval(incrementTimer, 1000);
+                $taskLabel.focus();
+                $('.loader').removeClass('loader--paused');
             }
 
             $controls.addClass('controls--running');
@@ -36,6 +38,7 @@ function stopwatch() {
             isRunning = false;
             clearInterval(interval);
             $timerWrapper.removeClass('timer-wrapper--running');
+            $('.loader').addClass('loader--paused');
         }
 
         function resetTimer() {
@@ -114,9 +117,11 @@ function stopwatch() {
 
                 $('.task-area .completed-tasks').text('Completed tasks:');
                 $('.button.create').show();
+                $('.time-list-meta').addClass('time-list-meta--show');
             } else {
-                $('.task-area .completed-tasks').text('No existing tasks');
+                $('.task-area .completed-tasks').text('No completed tasks');
                 $('.button.create').hide();
+                $('.time-list-meta').removeClass('time-list-meta--show');
             }
         }
 

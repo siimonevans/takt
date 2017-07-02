@@ -20,9 +20,12 @@
             </div>
           </div>
         </div>
-        <h4 class="completed-tasks">No completed tasks</h4>
+        <h4 class="completed-tasks"></h4>
         <ul class="time-list"></ul>
-        <a class="button" href="timesheet.html" target="_blank">View timesheet</a>
+        <div class="time-list-meta">
+          <a class="button" href="timesheet.html" target="_blank">View timesheet</a>
+          <button data-action="clear-all" class="button clear">Clear all tasks</button>
+        </div>
       </div>
       <div class="timer-area">
         <div class="timer-wrapper">
@@ -36,7 +39,6 @@
           <button data-action="stop" class="button stop">Pause</button>
           <button data-action="save" class="button finish">Finish</button>
           <button data-action="reset" class="button cancel">Cancel</button>
-          <button data-action="clear-all" class="button clear">Clear all tasks</button>
           <form class="task-form">
             <input type="text" class="task-label" placeholder="Task name&hellip;">
             <input type="text" class="task-project" placeholder="Task project&hellip;">

@@ -66,6 +66,14 @@
     }
 }
 
+.time-list-meta {
+    display: none;
+
+    &--show {
+        display: block;
+    }
+}
+
 .task-label,
 .task-project {
     @include placeholder-text {

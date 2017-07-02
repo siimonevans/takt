@@ -1439,7 +1439,10 @@ a {
 
 .app--timesheet {
   display: block;
-  padding: 0 20px 20px;
+  height: 100vh;
+  padding: 30px 50px;
+  overflow: scroll;
+  background-color: #120d2f;
 }
 
 /*------------------------------------*    $TYPOGRAPHY
@@ -1575,6 +1578,7 @@ small, .milli {
   font-weight: 400;
   letter-spacing: 1px;
   color: #f0eef9;
+  text-align: center;
   text-decoration: none;
   text-transform: uppercase;
   cursor: pointer;
@@ -1604,7 +1608,7 @@ small, .milli {
 .task-area {
   width: 50%;
   height: 100vh;
-  padding: 50px;
+  padding: 30px 50px;
   overflow: scroll;
   background-color: #120d2f;
 }
@@ -1745,6 +1749,14 @@ small, .milli {
 
 .time-list li button:hover, .time-list li button:focus {
   opacity: 1;
+}
+
+.time-list-meta {
+  display: none;
+}
+
+.time-list-meta--show {
+  display: block;
 }
 
 .task-label,
@@ -1912,7 +1924,7 @@ small, .milli {
   z-index: 0;
   opacity: 0;
   transform: translate3d(0, -65px, 0);
-  transition: transform 800ms ease, opacity 800ms ease;
+  transition: transform 500ms ease, opacity 500ms ease;
 }
 
 .controls .task-form--show {
@@ -1935,6 +1947,10 @@ small, .milli {
   font-size: 14px;
   font-weight: 300;
   border: 1px solid #2c245a;
+}
+
+.current-task__data div {
+  margin-bottom: 5px;
 }
 
 .current-task__in-progress {
@@ -1960,6 +1976,10 @@ small, .milli {
   width: 25px;
   height: 25px;
   border-radius: 50%;
+}
+
+.current-task__in-progress .loader--paused {
+  animation: none;
 }
 
 @keyframes loader {

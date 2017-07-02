@@ -66,7 +66,7 @@
         z-index: 0;
         opacity: 0;
         transform: translate3d(0, -65px, 0);
-        transition: transform 800ms ease, opacity 800ms ease;
+        transition: transform 500ms ease, opacity 500ms ease;
 
         &--show {
             opacity: 1;
