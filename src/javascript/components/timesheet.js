@@ -1,6 +1,6 @@
 import $ from '../globals';
 
-function getLocalStorage() {
+function timesheet() {
 
     function getData() {
 
@@ -15,9 +15,9 @@ function getLocalStorage() {
                     let seconds = totalTime[1];
 
                     if ( minutes == 0 ) {
-                        $('.time-list').append('<li><button data-name="'+ data[i].title +'"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task project: <span>' + data[i].project + '</span></div><div>Task duration: <span>'+ seconds +' seconds</span></div></li>');
+                        $('.time-list').append('<li><div>Task name: <span>' + data[i].title + '</span></div><div>Task project: <span>' + data[i].project + '</span></div><div>Task duration: <span>'+ seconds +' seconds</span></div></li>');
                     } else {
-                        $('.time-list').append('<li><button data-name="'+ data[i].title +'"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task project: <span>' + data[i].project + '</span></div><div>Task duration: <span>'+ minutes +' minutes and '+ seconds +' seconds</span></div></li>');
+                        $('.time-list').append('<li><div>Task name: <span>' + data[i].title + '</span></div><div>Task project: <span>' + data[i].project + '</span></div><div>Task duration: <span>'+ minutes +' minutes and '+ seconds +' seconds</span></div></li>');
                     }
                 }
                 
@@ -30,7 +30,7 @@ function getLocalStorage() {
     }
 
     function bindEvents() {
-        if ($('.app--main').length) {
+        if ($('.app--timesheet').length) {
             $(window).on('load', () => getData());
         }
     }
@@ -39,4 +39,4 @@ function getLocalStorage() {
 
 }
     
-export default getLocalStorage;
+export default timesheet;

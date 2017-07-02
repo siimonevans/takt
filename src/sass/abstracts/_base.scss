@@ -53,4 +53,9 @@ a {
     @include media-query(tablet) {
         display: block;
     }
+
+    &--timesheet {
+        display: block;
+        padding: 0 20px 20px;
+    }
 }

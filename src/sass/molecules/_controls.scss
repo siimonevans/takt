@@ -7,6 +7,9 @@
     text-align: center;
 
     button {
+        position: relative;
+        z-index: 1;
+
         &:last-of-type {
             margin-right: 0;
         }
@@ -55,6 +58,19 @@
             &::before {
                 display: none;
             }
+        }
+    }
+
+    .task-form {
+        position: relative;
+        z-index: 0;
+        opacity: 0;
+        transform: translate3d(0, -65px, 0);
+        transition: transform 800ms ease, opacity 800ms ease;
+
+        &--show {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
         }
     }
 }

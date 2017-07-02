@@ -1,0 +1,54 @@
+/*------------------------------------*\
+    $CURRENT TASK
+\*------------------------------------*/
+
+.current-task {
+    display: none;
+
+    &__inner {
+        position: relative;
+    }
+
+    &__data {
+        padding: 15px;
+        font-size: 14px;
+        font-weight: 300;
+        border: 1px solid #2c245a;
+    }
+
+    &__in-progress {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        bottom: 0;
+        height: 25px;
+        margin: auto;
+
+        .loader {
+            position: relative;
+            border-top: 2px solid rgba(255, 255, 255, 0.2);
+            border-right: 2px solid rgba(255, 255, 255, 0.2);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            border-left: 2px solid #7a6e8c;
+            transform: translateZ(0);
+            animation: loader 500ms infinite linear;
+
+            &,
+            &::after {
+                width: 25px;
+                height: 25px;
+                border-radius: 50%;
+            }
+        }
+
+        @keyframes loader {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    }
+}

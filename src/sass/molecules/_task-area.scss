@@ -5,7 +5,7 @@
 .task-area {
     width: 50%;
     height: 100vh;
-    padding: 50px 100px;
+    padding: 50px;
     overflow: scroll;
     background-color: #120d2f;
 
@@ -19,12 +19,6 @@
     }
 
     .create {
-        display: none;
-    }
-}
-
-.current-task {
-    &__heading {
         display: none;
     }
 }

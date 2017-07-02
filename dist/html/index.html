@@ -9,16 +9,20 @@
     <link rel="stylesheet" href="../css/main.css" media="all" />
   </head>
   <body>
-    <div class="app">
+    <div class="app app--main">
       <div class="task-area">
         <div class="current-task">
           <h4 class="current-task__heading">Current task:</h4>
-          <div class="current-task__data"></div>
+          <div class="current-task__inner">
+            <div class="current-task__data"></div>
+            <div class="current-task__in-progress">
+              <div class="loader"></div>
+            </div>
+          </div>
         </div>
         <h4 class="completed-tasks">No completed tasks</h4>
         <ul class="time-list"></ul>
-        <button class="button create">Create summary</button> 
-        <a class="button" download="tasklist.html" id="download-link" style="display: none;">Download</a>
+        <a class="button" href="timesheet.html" target="_blank">View timesheet</a>
       </div>
       <div class="timer-area">
         <div class="timer-wrapper">
@@ -33,8 +37,10 @@
           <button data-action="save" class="button finish">Finish</button>
           <button data-action="reset" class="button cancel">Cancel</button>
           <button data-action="clear-all" class="button clear">Clear all tasks</button>
-          <form>
+          <form class="task-form">
             <input type="text" class="task-label" placeholder="Task name&hellip;">
+            <input type="text" class="task-project" placeholder="Task project&hellip;">
+            <input type="submit" class="task-submit">
           </form>
         </div>
       </div>

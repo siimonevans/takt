@@ -42,7 +42,9 @@ html {
 h1, h2, h3, h4, h5, h6,
 .heading-text {
     @include heading-text;
+    margin-bottom: 10px;
     font-weight: 200;
+    letter-spacing: 1px;
 }
 // sass-lint:enddisable
 

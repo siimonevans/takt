@@ -13,7 +13,6 @@
 }
 
 .time-list {
-    margin-top: 30px;
     color: #fff;
 
     li {
@@ -23,11 +22,16 @@
         border: 1px solid #2c245a;
 
         div {
+            margin-bottom: 5px;
             font-size: 12px;
             font-weight: 400;
             letter-spacing: 1px;
             color: #b3b3c1;
             text-transform: uppercase;
+
+            &:last-of-type {
+                margin-bottom: 0;
+            }
         }
 
         span {
@@ -39,7 +43,7 @@
         button {
             position: absolute;
             top: 0;
-            right: 15px;
+            right: 25px;
             bottom: 0;
             width: 22px;
             height: 23px;
@@ -62,12 +66,13 @@
     }
 }
 
-.task-label {
+.task-label,
+.task-project {
     @include placeholder-text {
         color: #f0eef9;
+        transition: color $default-transition-speed ease;
     }
 
-    display: none;
     width: 57%;
     padding: 10px;
     margin: 30px auto 0;
@@ -77,18 +82,26 @@
     border-right: 0;
     border-bottom: 1px solid #777094;
     border-left: 0;
+    transition: border-color $default-transition-speed ease;
 
-    &:focus,
-    &:hover {
+    &:focus {
+        @include placeholder-text {
+            color: #a8a0ca;
+        }
+
+        border-color: #a8a0ca;
         outline: 0;
-    }
-
-    &--show {
-        display: block;
     }
 
     @include media-query(mobile) {
         width: 100%;
         margin-top: 10px;
     }
+}
+
+.task-submit {
+    position: absolute;
+    top: -9999px;
+    opacity: 0;
+    visibility: hidden;
 }

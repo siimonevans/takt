@@ -13,13 +13,13 @@ function stopwatch() {
             seconds             = document.querySelector('.seconds'),
             $controls           = $('.controls'),
             $taskLabel          = $('.task-label'),
-            $timerWrapper       = $('.timer-wrapper'),
-            $createFile         = $('.create');
+            $taskProject        = $('.task-project'),
+            $taskForm           = $('.task-form'),
+            $timerWrapper       = $('.timer-wrapper');
 
         let timerTime           = 0,
             interval            = null,
-            isRunning           = false,
-            textFile            = null;
+            isRunning           = false;
 
         function startTimer() {
             if (!isRunning) {
@@ -28,14 +28,13 @@ function stopwatch() {
             }
 
             $controls.addClass('controls--running');
-            $taskLabel.addClass('task-label--show');
+            $taskForm.addClass('task-form--show');
             $timerWrapper.addClass('timer-wrapper--running');
         }
 
         function stopTimer() {
             isRunning = false;
             clearInterval(interval);
-
             $timerWrapper.removeClass('timer-wrapper--running');
         }
 
@@ -54,11 +53,12 @@ function stopwatch() {
         }
 
         // Add to localStorage
-        function addStoredItem(title, time) {
+        function addStoredItem(title, project, time) {
             const existingItems = JSON.parse(localStorage.getItem('storageString')) || [];
             
             const newItem = {
                 title,
+                project,
                 time
             };
     
@@ -85,9 +85,10 @@ function stopwatch() {
         // Reset UI
         function resetUI() {
             $taskLabel.val('');
-            $taskLabel.removeClass('task-label--show');
+            $taskProject.val('');
+            $taskForm.removeClass('task-form--show');
             $('.current-task__data').html('');
-            $('.current-task__heading').hide();
+            $('.current-task').hide();
             $controls.removeClass('controls--running');
         }
 
@@ -105,9 +106,9 @@ function stopwatch() {
                     let seconds = totalTime[1];
 
                     if ( minutes == 0 ) {
-                        $('.time-list').append('<li><button data-name="'+ data[i].title +'"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task duration: <span>'+ seconds +' seconds</span></div></li>');
+                        $('.time-list').append('<li><button data-name="'+ data[i].title +'"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task project: <span>' + data[i].project + '</span></div><div>Task duration: <span>'+ seconds +' seconds</span></div></li>');
                     } else {
-                        $('.time-list').append('<li><button data-name="'+ data[i].title +'"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task duration: <span>'+ minutes +' minutes and '+ seconds +' seconds</span></div></li>');
+                        $('.time-list').append('<li><button data-name="'+ data[i].title +'"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task project: <span>' + data[i].project + '</span></div><div>Task duration: <span>'+ minutes +' minutes and '+ seconds +' seconds</span></div></li>');
                     }
                 }
 
@@ -124,9 +125,10 @@ function stopwatch() {
             const numOfMinutes      = Math.floor(timerTime / 60),
                 numOfSeconds        = timerTime % 60,
                 totalTime           = '' + numOfMinutes + ':' + numOfSeconds,
-                label               = $taskLabel.val();
+                label               = $taskLabel.val(),
+                project             = $taskProject.val();
 
-            addStoredItem(label, totalTime);
+            addStoredItem(label, project, totalTime);
             updateTimeList();
             resetUI();
             resetTimer();
@@ -141,17 +143,6 @@ function stopwatch() {
             minutes.innerText = numOfMinutes >= 10 ? numOfMinutes : '0' + numOfMinutes;
         }
 
-        function makeFile(text) {
-            var data = new Blob([text], {type: 'text/plain'});
-
-            if (textFile !== null) {
-                window.URL.revokeObjectURL(textFile);
-            }
-
-            textFile = window.URL.createObjectURL(data);
-            return textFile;
-        }
-
         $startButton.addEventListener('click', startTimer);
         $stopButton.addEventListener('click', stopTimer);
         $resetButton.addEventListener('click', resetTimer);
@@ -160,26 +151,20 @@ function stopwatch() {
 
         $('form').on('submit', function(e) {
             e.preventDefault();
-            $('.current-task__heading').show();
-            $('.current-task__data').html('<div>' + $taskLabel.val() + '</div>');
+            $('.current-task').show();
+            $('.current-task__data').html('<div>' + $taskLabel.val() + '</div><div>' + $taskProject.val() + '</div>');
         });
 
         $('body').on('click', '.time-list li button', function () {
             var item = $(this);
             deleteItem(item);
         });
-
-        $createFile.on('click', function () {
-            var timeSheet = $('.time-list').html();
-            var link = document.getElementById('download-link');
-            link.href = makeFile(timeSheet);
-            $createFile.hide();
-            link.style.display = 'inline-block';
-        }); 
     }
 
     function bindEvents() {
-        $(window).on('load', () => timer());
+        if ($('.app--main').length) {
+            $(window).on('load', () => timer());
+        }
     }
 
     bindEvents();
