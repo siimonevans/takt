@@ -9,15 +9,17 @@ function stopwatch() {
             $resetButton        = document.querySelector('[data-action="reset"]'),
             $saveButton         = document.querySelector('[data-action="save"]'),
             $clearButton        = document.querySelector('[data-action="clear-all"]'),
+            minutes             = document.querySelector('.minutes'),
+            seconds             = document.querySelector('.seconds'),
             $controls           = $('.controls'),
             $taskLabel          = $('.task-label'),
             $timerWrapper       = $('.timer-wrapper'),
-            minutes             = document.querySelector('.minutes'),
-            seconds             = document.querySelector('.seconds');
+            $createFile         = $('.create');
 
         let timerTime           = 0,
             interval            = null,
-            isRunning           = false;
+            isRunning           = false,
+            textFile            = null;
 
         function startTimer() {
             if (!isRunning) {
@@ -133,6 +135,17 @@ function stopwatch() {
             minutes.innerText = numOfMinutes >= 10 ? numOfMinutes : '0' + numOfMinutes;
         }
 
+        function makeFile(text) {
+            var data = new Blob([text], {type: 'text/plain'});
+
+            if (textFile !== null) {
+                window.URL.revokeObjectURL(textFile);
+            }
+
+            textFile = window.URL.createObjectURL(data);
+            return textFile;
+        }
+
         $startButton.addEventListener('click', startTimer);
         $stopButton.addEventListener('click', stopTimer);
         $resetButton.addEventListener('click', resetTimer);
@@ -149,6 +162,14 @@ function stopwatch() {
             var item = $(this);
             deleteItem(item);
         });
+
+        $createFile.on('click', function () {
+            var timeSheet = $('.time-list').html();
+            var link = document.getElementById('download-link');
+            link.href = makeFile(timeSheet);
+            $createFile.hide();
+            link.style.display = 'inline-block';
+        }); 
     }
 
     function bindEvents() {

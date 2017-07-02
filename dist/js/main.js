@@ -2237,15 +2237,17 @@ function stopwatch() {
             $resetButton = document.querySelector('[data-action="reset"]'),
             $saveButton = document.querySelector('[data-action="save"]'),
             $clearButton = document.querySelector('[data-action="clear-all"]'),
+            minutes = document.querySelector('.minutes'),
+            seconds = document.querySelector('.seconds'),
             $controls = jquery('.controls'),
             $taskLabel = jquery('.task-label'),
             $timerWrapper = jquery('.timer-wrapper'),
-            minutes = document.querySelector('.minutes'),
-            seconds = document.querySelector('.seconds');
+            $createFile = jquery('.create');
 
         var timerTime = 0,
             interval = null,
-            isRunning = false;
+            isRunning = false,
+            textFile = null;
 
         function startTimer() {
             if (!isRunning) {
@@ -2361,6 +2363,17 @@ function stopwatch() {
             minutes.innerText = numOfMinutes >= 10 ? numOfMinutes : '0' + numOfMinutes;
         }
 
+        function makeFile(text) {
+            var data = new Blob([text], { type: 'text/plain' });
+
+            if (textFile !== null) {
+                window.URL.revokeObjectURL(textFile);
+            }
+
+            textFile = window.URL.createObjectURL(data);
+            return textFile;
+        }
+
         $startButton.addEventListener('click', startTimer);
         $stopButton.addEventListener('click', stopTimer);
         $resetButton.addEventListener('click', resetTimer);
@@ -2376,6 +2389,14 @@ function stopwatch() {
         jquery('body').on('click', '.time-list li button', function () {
             var item = jquery(this);
             deleteItem(item);
+        });
+
+        $createFile.on('click', function () {
+            var timeSheet = jquery('.time-list').html();
+            var link = document.getElementById('download-link');
+            link.href = makeFile(timeSheet);
+            $createFile.hide();
+            link.style.display = 'inline-block';
         });
     }
 

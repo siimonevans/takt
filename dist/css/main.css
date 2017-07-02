@@ -1420,6 +1420,12 @@ ol {
   list-style: none;
 }
 
+a {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 300;
+}
+
 /*------------------------------------*    $TYPOGRAPHY
 \*------------------------------------*/
 /* ============================================
@@ -1538,6 +1544,32 @@ small, .milli {
 
 .article h1 {
   margin-bottom: 10px;
+}
+
+/*------------------------------------*    $BUTTONS
+\*------------------------------------*/
+.button {
+  position: relative;
+  display: inline-block;
+  padding: 9px 15px;
+  margin-right: 9px;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  color: #f0eef9;
+  text-decoration: none;
+  text-transform: uppercase;
+  cursor: pointer;
+  background-color: transparent;
+  border: 1px solid #777094;
+  transition: border-color 300ms ease, background-color 300ms ease, color 300ms ease;
+}
+
+.button:hover, .button:focus {
+  color: #09061b;
+  background-color: #fff;
+  border-color: #09061b;
+  outline: 0;
 }
 
 /*------------------------------------*    $MOLECULES
@@ -1711,35 +1743,8 @@ small, .milli {
   text-align: center;
 }
 
-.controls button {
-  position: relative;
-  padding: 9px 15px;
-  margin-right: 9px;
-  font-size: 12px;
-  font-weight: 400;
-  letter-spacing: 1px;
-  color: #f0eef9;
-  text-transform: uppercase;
-  cursor: pointer;
-  background-color: transparent;
-  border: 1px solid #777094;
-  transition: border-color 300ms ease, background-color 300ms ease, color 300ms ease;
-}
-
 .controls button:last-of-type {
   margin-right: 0;
-}
-
-.controls button:hover, .controls button:focus {
-  color: #09061b;
-  background-color: #fff;
-  border-color: #09061b;
-  outline: 0;
-}
-
-.controls .clear {
-  position: absolute;
-  top: -9999px;
 }
 
 .controls .stop,

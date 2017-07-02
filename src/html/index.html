@@ -17,6 +17,8 @@
         </div>
         <h4>Completed tasks:</h4>
         <ul class="time-list"></ul>
+        <button class="button create">Create summary</button> 
+        <a class="button" download="tasklist.html" id="download-link" style="display: none;">Download</a>
       </div><!--
       --><div class="timer-area">
         <div class="timer-wrapper">
@@ -26,11 +28,11 @@
           </div>
         </div>
         <div class="controls">
-          <button data-action="start" class="start">Start</button>
-          <button data-action="stop" class="stop">Pause</button>
-          <button data-action="save" class="finish">Finish</button>
-          <button data-action="reset" class="cancel">Cancel</button>
-          <button data-action="clear-all" class="clear">Clear all tasks</button>
+          <button class="button" data-action="start" class="start">Start</button>
+          <button class="button" data-action="stop" class="stop">Pause</button>
+          <button class="button" data-action="save" class="finish">Finish</button>
+          <button class="button" data-action="reset" class="cancel">Cancel</button>
+          <button class="button" data-action="clear-all" class="clear">Clear all tasks</button>
           <form>
             <input type="text" class="task-label" placeholder="Task name&hellip;">
           </form>
