@@ -21,7 +21,7 @@ files:
 rules:
   bem-depth:
     - 1
-    - max-depth: 3
+    - max-depth: 4
   extends-before-mixins: 2
   extends-before-declarations: 2
   placeholder-in-extend: 2
