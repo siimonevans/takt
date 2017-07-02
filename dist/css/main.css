@@ -1622,20 +1622,48 @@ small, .milli {
 }
 
 .time-list li {
+  position: relative;
   padding: 15px;
-  margin-bottom: 30px;
-  border-top: 1px solid #2c245a;
-  border-bottom: 1px solid #2c245a;
+  margin-bottom: 20px;
+  border: 1px solid #2c245a;
 }
 
 .time-list li div {
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: 1px;
+  color: #b3b3c1;
   text-transform: uppercase;
 }
 
-.time-label {
+.time-list li span {
+  font-weight: 300;
+  color: #fff;
+  text-transform: none;
+}
+
+.time-list li button {
+  position: absolute;
+  top: 0;
+  right: 15px;
+  bottom: 0;
+  width: 22px;
+  height: 23px;
+  margin: auto;
+  cursor: pointer;
+  background-color: transparent;
+  background-size: cover;
+  background-image: url("../images/bin.svg");
+  border: 0;
+  opacity: 0.5;
+  transition: opacity 300ms ease;
+}
+
+.time-list li button:hover, .time-list li button:focus {
+  opacity: 1;
+}
+
+.task-label {
   display: none;
   width: 57%;
   padding: 10px;
@@ -1648,31 +1676,31 @@ small, .milli {
   border-left: 0;
 }
 
-.time-label.placeholder {
+.task-label.placeholder {
   color: #f0eef9;
 }
 
-.time-label:-moz-placeholder {
+.task-label:-moz-placeholder {
   color: #f0eef9;
 }
 
-.time-label::-moz-placeholder {
+.task-label::-moz-placeholder {
   color: #f0eef9;
 }
 
-.time-label:-ms-input-placeholder {
+.task-label:-ms-input-placeholder {
   color: #f0eef9;
 }
 
-.time-label::-webkit-input-placeholder {
+.task-label::-webkit-input-placeholder {
   color: #f0eef9;
 }
 
-.time-label:focus, .time-label:hover {
+.task-label:focus, .task-label:hover {
   outline: 0;
 }
 
-.time-label--show {
+.task-label--show {
   display: block;
 }
 

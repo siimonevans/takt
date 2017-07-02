@@ -2237,6 +2237,9 @@ function stopwatch() {
             $resetButton = document.querySelector('[data-action="reset"]'),
             $saveButton = document.querySelector('[data-action="save"]'),
             $clearButton = document.querySelector('[data-action="clear-all"]'),
+            $controls = jquery('.controls'),
+            $taskLabel = jquery('.task-label'),
+            $timerWrapper = jquery('.timer-wrapper'),
             minutes = document.querySelector('.minutes'),
             seconds = document.querySelector('.seconds');
 
@@ -2250,16 +2253,16 @@ function stopwatch() {
                 interval = setInterval(incrementTimer, 1000);
             }
 
-            jquery('.controls').addClass('controls--running');
-            jquery('.time-label').addClass('time-label--show');
-            jquery('.timer-wrapper').addClass('timer-wrapper--running');
+            $controls.addClass('controls--running');
+            $taskLabel.addClass('task-label--show');
+            $timerWrapper.addClass('timer-wrapper--running');
         }
 
         function stopTimer() {
             isRunning = false;
             clearInterval(interval);
 
-            jquery('.timer-wrapper').removeClass('timer-wrapper--running');
+            $timerWrapper.removeClass('timer-wrapper--running');
         }
 
         function resetTimer() {
@@ -2307,11 +2310,11 @@ function stopwatch() {
 
         // Reset UI
         function resetUI() {
-            jquery('.time-label').val('');
-            jquery('.time-label').removeClass('time-label--show');
+            $taskLabel.val('');
+            $taskLabel.removeClass('task-label--show');
             jquery('.current-task__data').html('');
             jquery('.current-task__heading').hide();
-            jquery('.controls').removeClass('controls--running');
+            $controls.removeClass('controls--running');
         }
 
         // Update UI
@@ -2328,9 +2331,9 @@ function stopwatch() {
                     var _seconds = totalTime[1];
 
                     if (_minutes == 0) {
-                        jquery('.time-list').append('<li><button data-name="' + data[i].title + '">Delete</button><div>Task name: ' + data[i].title + '</div><div>Task duration: ' + _seconds + ' seconds</div></li>');
+                        jquery('.time-list').append('<li><button data-name="' + data[i].title + '"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task duration: <span>' + _seconds + ' seconds</span></div></li>');
                     } else {
-                        jquery('.time-list').append('<li><button data-name="' + data[i].title + '">Delete</button><div>Task name: ' + data[i].title + '</div><div>Task duration: ' + _minutes + ' minutes and ' + _seconds + ' seconds</div></li>');
+                        jquery('.time-list').append('<li><button data-name="' + data[i].title + '"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task duration: <span>' + _minutes + ' minutes and ' + _seconds + ' seconds</span></div></li>');
                     }
                 }
             }
@@ -2341,7 +2344,7 @@ function stopwatch() {
             var numOfMinutes = Math.floor(timerTime / 60),
                 numOfSeconds = timerTime % 60,
                 totalTime = '' + numOfMinutes + ':' + numOfSeconds,
-                label = jquery('.time-label').val();
+                label = $taskLabel.val();
 
             addStoredItem(label, totalTime);
             updateTimeList();
@@ -2367,7 +2370,7 @@ function stopwatch() {
         jquery('form').on('submit', function (e) {
             e.preventDefault();
             jquery('.current-task__heading').show();
-            jquery('.current-task__data').html('<div>' + jquery('.time-label').val() + '</div>');
+            jquery('.current-task__data').html('<div>' + $taskLabel.val() + '</div>');
         });
 
         jquery('body').on('click', '.time-list li button', function () {
@@ -2397,9 +2400,9 @@ function getLocalStorage() {
             var seconds = totalTime[1];
 
             if (minutes == 0) {
-                jquery('.time-list').append('<li><button data-name="' + data[i].title + '">Delete</button><div>Task name: ' + data[i].title + '</div><div>Task duration: ' + seconds + ' seconds</div></li>');
+                jquery('.time-list').append('<li><button data-name="' + data[i].title + '"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task duration: <span>' + seconds + ' seconds</span></div></li>');
             } else {
-                jquery('.time-list').append('<li><button data-name="' + data[i].title + '">Delete</button><div>Task name: ' + data[i].title + '</div><div>Task duration: ' + minutes + ' minutes and ' + seconds + ' seconds</div></li>');
+                jquery('.time-list').append('<li><button data-name="' + data[i].title + '"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task duration: <span>' + minutes + ' minutes and ' + seconds + ' seconds</span></div></li>');
             }
         }
     }

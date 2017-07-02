@@ -17,21 +17,52 @@
     color: #fff;
 
     li {
+        position: relative;
         padding: 15px;
-        margin-bottom: 30px;
-        border-top: 1px solid #2c245a;
-        border-bottom: 1px solid #2c245a;
+        margin-bottom: 20px;
+        border: 1px solid #2c245a;
 
         div {
             font-size: 12px;
-            font-weight: 500;
+            font-weight: 400;
             letter-spacing: 1px;
+            color: #b3b3c1;
             text-transform: uppercase;
+        }
+
+        span {
+            font-weight: 300;
+            color: #fff;
+            text-transform: none;
+        }
+
+        button {
+            position: absolute;
+            top: 0;
+            right: 15px;
+            bottom: 0;
+            width: 22px;
+            height: 23px;
+            margin: auto;
+            cursor: pointer;
+            background: {
+                color: transparent;
+                size: cover;
+                image: url('../images/bin.svg');
+            }
+            border: 0;
+            opacity: 0.5;
+            transition: opacity $default-transition-speed ease;
+
+            &:hover,
+            &:focus {
+                opacity: 1;
+            }
         }
     }
 }
 
-.time-label {
+.task-label {
     @include placeholder-text {
         color: #f0eef9;
     }
