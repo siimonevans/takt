@@ -1,7 +1,7 @@
 # Tempo
 <img src="https://sii.im/playground/tempo/tempo-ss.png" alt="Tempo app" width='350px'>
 
-Another time tracking app. Lightweight, using only LocalStorage to save tasks. 
+Another time tracking app, [try it out here.](https://sii.im/playground/tempo)
 
 Features:
 - Add new tasks with a title and relevant project name
@@ -18,5 +18,3 @@ Limitations:
 Bundled with a Service Worker for offline support, and made as PWA-y as possible:
 
 <img src="https://sii.im/playground/tempo/tempo-lighthouse.png" alt="Tempo app lighthouse score" width='200px'>
-
-View the demo [here.](https://sii.im/playground/tempo)
