@@ -1635,7 +1635,7 @@ small, .milli {
 .timer-area {
   width: 50%;
   height: 100vh;
-  padding-top: 100px;
+  padding-top: 70px;
   background-color: #09061b;
 }
 
@@ -1693,7 +1693,7 @@ small, .milli {
 .timer {
   position: absolute;
   width: 100%;
-  margin-top: 54px;
+  margin-top: 60px;
   font-size: 40px;
   font-weight: 200;
   color: #fff;
@@ -1852,7 +1852,7 @@ small, .milli {
 /*------------------------------------*    $CONTROLS
 \*------------------------------------*/
 .controls {
-  margin: 40px auto 0;
+  margin: 70px auto 0;
   text-align: center;
 }
 
