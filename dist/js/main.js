@@ -3455,12 +3455,13 @@ var jquery = createCommonjsModule(function (module) {
     });
 });
 
+// We have to manually make jQuery a global variable.
+// By default it will be in a closure and renamed to lowercase.
 window.jQuery = jquery;
 
-function stopwatch() {
+function tempo() {
 
     function timer() {
-
         var $startButton = document.querySelector('[data-action="start"]'),
             $stopButton = document.querySelector('[data-action="stop"]'),
             $resetButton = document.querySelector('[data-action="reset"]'),
@@ -3478,6 +3479,7 @@ function stopwatch() {
             interval = null,
             isRunning = false;
 
+        // Run timer
         function startTimer() {
             if (!isRunning) {
                 isRunning = true;
@@ -3486,18 +3488,23 @@ function stopwatch() {
                 jquery('.loader').removeClass('loader--paused');
             }
 
+            // Update UI
             $controls.addClass('controls--running');
             $taskForm.addClass('task-form--show');
             $timerWrapper.addClass('timer-wrapper--running');
         }
 
+        // Stop timer
         function stopTimer() {
             isRunning = false;
             clearInterval(interval);
+
+            // Update UI
             $timerWrapper.removeClass('timer-wrapper--running');
             jquery('.loader').addClass('loader--paused');
         }
 
+        // Reset timer to zero
         function resetTimer() {
             stopTimer();
             resetUI();
@@ -3506,40 +3513,28 @@ function stopwatch() {
             minutes.innerText = '00';
         }
 
-        // Clear time list
-        function clearData() {
-            localStorage.removeItem('storageString');
-            updateTimeList();
+        // Increment timer
+        function incrementTimer() {
+            var numOfMinutes = Math.floor(timerTime / 60),
+                numOfSeconds = timerTime % 60;
+
+            timerTime = timerTime + 1;
+            seconds.innerText = numOfSeconds >= 10 ? numOfSeconds : '0' + numOfSeconds;
+            minutes.innerText = numOfMinutes >= 10 ? numOfMinutes : '0' + numOfMinutes;
         }
 
-        // Add to localStorage
-        function addStoredItem(title, project, time) {
-            var existingItems = JSON.parse(localStorage.getItem('storageString')) || [];
+        // Get timer value
+        function saveTimer() {
+            var numOfMinutes = Math.floor(timerTime / 60),
+                numOfSeconds = timerTime % 60,
+                totalTime = '' + numOfMinutes + ':' + numOfSeconds,
+                label = $taskLabel.val(),
+                project = $taskProject.val();
 
-            var newItem = {
-                title: title,
-                project: project,
-                time: time
-            };
-
-            existingItems.push(newItem);
-            localStorage.setItem('storageString', JSON.stringify(existingItems));
-        }
-
-        // Remove items
-        function deleteItem(item) {
-            var data = JSON.parse(localStorage.getItem('storageString')),
-                clickedItem = item.attr('data-name');
-
-            jquery.each(data, function (i) {
-                if (data[i].title == clickedItem) {
-                    data.splice(i, 1);
-                    localStorage.setItem('storageString', JSON.stringify(data));
-                    return false;
-                }
-            });
-
+            addStoredItem(label, project, totalTime);
             updateTimeList();
+            resetUI();
+            resetTimer();
         }
 
         // Reset UI
@@ -3552,8 +3547,47 @@ function stopwatch() {
             $controls.removeClass('controls--running');
         }
 
+        // Add tasks to localStorage
+        // Save data in one long string for easier addition/removal/editing
+        function addStoredItem(title, project, time) {
+            var existingItems = JSON.parse(localStorage.getItem('storageString')) || [];
+            var newItem = {
+                title: title,
+                project: project,
+                time: time
+            };
+
+            existingItems.push(newItem);
+            localStorage.setItem('storageString', JSON.stringify(existingItems));
+        }
+
+        // Remove tasks from locaStorage
+        function deleteItem(item) {
+            var data = JSON.parse(localStorage.getItem('storageString')),
+                clickedItem = item.attr('data-name');
+
+            jquery.each(data, function (i) {
+                if (data[i].title == clickedItem) {
+                    data.splice(i, 1);
+                    localStorage.setItem('storageString', JSON.stringify(data));
+                    return false;
+                }
+            });
+
+            // Update task list to show localStorage data
+            updateTimeList();
+        }
+
+        // Remove all tasks from localStorage
+        function clearData() {
+            localStorage.removeItem('storageString');
+            updateTimeList();
+        }
+
         // Update UI
         function updateTimeList() {
+
+            // Empty list contents
             jquery('.time-list').html('');
 
             if (localStorage.getItem('storageString')) {
@@ -3582,45 +3616,28 @@ function stopwatch() {
             }
         }
 
-        // Save time value
-        function saveTimer() {
-            var numOfMinutes = Math.floor(timerTime / 60),
-                numOfSeconds = timerTime % 60,
-                totalTime = '' + numOfMinutes + ':' + numOfSeconds,
-                label = $taskLabel.val(),
-                project = $taskProject.val();
+        function eventHandler() {
+            $startButton.addEventListener('click', startTimer);
+            $stopButton.addEventListener('click', stopTimer);
+            $resetButton.addEventListener('click', resetTimer);
+            $saveButton.addEventListener('click', saveTimer);
+            $clearButton.addEventListener('click', clearData);
 
-            addStoredItem(label, project, totalTime);
-            updateTimeList();
-            resetUI();
-            resetTimer();
+            // Set current task
+            $taskForm.on('submit', function (e) {
+                e.preventDefault();
+                jquery('.current-task').show();
+                jquery('.current-task__data').html('<div>' + $taskLabel.val() + '</div><div>' + $taskProject.val() + '</div>');
+            });
+
+            // Remove task
+            jquery('body').on('click', '.time-list li button', function () {
+                var item = jquery(this);
+                deleteItem(item);
+            });
         }
 
-        function incrementTimer() {
-            var numOfMinutes = Math.floor(timerTime / 60),
-                numOfSeconds = timerTime % 60;
-
-            timerTime = timerTime + 1;
-            seconds.innerText = numOfSeconds >= 10 ? numOfSeconds : '0' + numOfSeconds;
-            minutes.innerText = numOfMinutes >= 10 ? numOfMinutes : '0' + numOfMinutes;
-        }
-
-        $startButton.addEventListener('click', startTimer);
-        $stopButton.addEventListener('click', stopTimer);
-        $resetButton.addEventListener('click', resetTimer);
-        $saveButton.addEventListener('click', saveTimer);
-        $clearButton.addEventListener('click', clearData);
-
-        jquery('form').on('submit', function (e) {
-            e.preventDefault();
-            jquery('.current-task').show();
-            jquery('.current-task__data').html('<div>' + $taskLabel.val() + '</div><div>' + $taskProject.val() + '</div>');
-        });
-
-        jquery('body').on('click', '.time-list li button', function () {
-            var item = jquery(this);
-            deleteItem(item);
-        });
+        eventHandler();
     }
 
     function bindEvents() {
@@ -3716,7 +3733,7 @@ function timesheet() {
     bindEvents();
 }
 
-stopwatch();
+tempo();
 getLocalStorage();
 timesheet();
 
