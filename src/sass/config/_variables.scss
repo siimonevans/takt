@@ -47,7 +47,7 @@ $button-colours: (
    :: Default to system font stack
 */
 $font--primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
-$font--secondary: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+$font--secondary: 'Droid Sans Mono', monospace;
 
 $base-font-size: 16px;
 $base-line-height: 25px;
