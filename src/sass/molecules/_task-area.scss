@@ -6,7 +6,7 @@
     width: 50%;
     height: 100vh;
     padding: 30px 50px;
-    overflow: scroll;
+    overflow: auto;
     background-color: #120d2f;
 
     @include media-query(laptop) {
