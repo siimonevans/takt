@@ -1,0 +1,29 @@
+.info {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    padding: 15px 15px 12px;
+    transition: background-color 300ms ease;
+
+    @include media-query(mobile) {
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 2;
+    }
+
+    svg {
+        width: 25px;
+        height: 25px;
+        transition: fill 300ms ease;
+        fill: #a695c7;
+
+        &:hover {
+            fill: #6e5f8c;
+        }
+
+        @include media-query(mobile) {
+            width: 20px;
+        }
+    }
+}
