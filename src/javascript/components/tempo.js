@@ -14,7 +14,13 @@ function tempo() {
             $taskLabel          = $('.task-label'),
             $taskProject        = $('.task-project'),
             $taskForm           = $('.task-form'),
-            $timerWrapper       = $('.timer-wrapper');
+            $timerWrapper       = $('.timer-wrapper'),
+            $modal              = $('.modal'),
+            $modalClose         = $('.modal__cancel'),
+            $modalTitle         = $('.modal__title'),
+            $modalProject       = $('.modal__project'),
+            $modalSave          = $('.modal__save'),
+            $modalForm          = $('.modal__form');
 
         let timerTime           = 0,
             interval            = null,
@@ -109,7 +115,7 @@ function tempo() {
         // Remove tasks from locaStorage
         function deleteItem(item) {
             const data = JSON.parse(localStorage.getItem('storageString')),
-                clickedItem = item.attr('data-name');
+                clickedItem = item.parent().attr('data-name');
 
             $.each(data, function(i) {
                 if (data[i].title == clickedItem) {
@@ -121,6 +127,55 @@ function tempo() {
 
             // Update task list to show localStorage data
             updateTimeList();
+        }
+
+        function populateModal(title, project) {
+            $modalTitle.val(title);
+            $modalProject.val(project);
+            $modal.attr('data-name', title);
+            showModal();
+        }
+
+        function showModal() {
+            $modal.fadeIn();
+        }
+
+        function hideModal() {
+            $modal.fadeOut();
+        }
+
+        // Prepare/populate modal
+        function prepareModal(item) {  
+            const data = JSON.parse(localStorage.getItem('storageString')),
+                clickedItem = item.parent().attr('data-name');
+
+            $.each(data, function(i) {
+                if (data[i].title == clickedItem) {
+                    populateModal(data[i].title, data[i].project, data[i].time);
+                    localStorage.setItem('storageString', JSON.stringify(data));
+                    return false;
+                }
+            });
+        }
+
+        // Save modal contents
+        function saveModal() {
+            const data = JSON.parse(localStorage.getItem('storageString')),
+                currentItem = $modal.attr('data-name');
+
+            $.each(data, function(i) {
+                if (data[i].title == currentItem) {
+                    data[i].title = $modalTitle.val();
+                    data[i].project = $modalProject.val();
+                    localStorage.setItem('storageString', JSON.stringify(data));
+                    return false;
+                }
+            });
+
+            // Update task list to show localStorage data
+            updateTimeList();
+            hideModal();
+            return false;
         }
 
         // Remove all tasks from localStorage
@@ -145,9 +200,9 @@ function tempo() {
                     let seconds = totalTime[1];
 
                     if ( minutes == 0 ) {
-                        $('.time-list').append('<li><button data-name="'+ data[i].title +'"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task project: <span>' + data[i].project + '</span></div><div>Task duration: <span>'+ seconds +' seconds</span></div></li>');
+                        $('.time-list').append('<li data-name="'+ data[i].title +'"><button class="edit-task"></button><button class="delete-task"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task project: <span>' + data[i].project + '</span></div><div>Task duration: <span>'+ seconds +' seconds</span></div></li>');
                     } else {
-                        $('.time-list').append('<li><button data-name="'+ data[i].title +'"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task project: <span>' + data[i].project + '</span></div><div>Task duration: <span>'+ minutes +' minutes and '+ seconds +' seconds</span></div></li>');
+                        $('.time-list').append('<li data-name="'+ data[i].title +'"><button class="edit-task"></button><button class="delete-task"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task project: <span>' + data[i].project + '</span></div><div>Task duration: <span>'+ minutes +' minutes and '+ seconds +' seconds</span></div></li>');
                     }
                 }
 
@@ -176,10 +231,20 @@ function tempo() {
             });
 
             // Remove task
-            $('body').on('click', '.time-list li button', function () {
+            $(document).on('click', '.time-list li .delete-task', function () {
                 var item = $(this);
                 deleteItem(item);
             });
+
+            // Edit task
+            $(document).on('click', '.time-list li .edit-task', function () {
+                var item = $(this);
+                prepareModal(item);
+            });
+
+            $modalClose.on('click', () => hideModal());
+            $modalForm.on('submit', () => saveModal());
+            $modalSave.on('click', () => saveModal());
         }
 
         eventHandler();

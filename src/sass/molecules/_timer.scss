@@ -18,9 +18,13 @@
 
     li {
         position: relative;
-        padding: 15px;
+        padding: 15px 100px 15px 15px;
         margin-bottom: 20px;
         border: 1px solid #2c245a;
+
+        @include media-query(mobile) {
+            padding-right: 80px;
+        }
 
         div {
             margin-bottom: 5px;
@@ -33,27 +37,36 @@
             &:last-of-type {
                 margin-bottom: 0;
             }
+
+            @include media-query(mobile) {
+                margin-bottom: 20px;
+
+                &:last-of-type {
+                    margin-bottom: 0;
+                }
+            }
         }
 
         span {
             font-weight: 300;
             color: #fff;
             text-transform: none;
+
+            @include media-query(mobile) {
+                display: block;
+            }
         }
 
-        button {
+        .edit-task,
+        .delete-task {
             position: absolute;
             top: 0;
-            right: 25px;
             bottom: 0;
-            width: 22px;
-            height: 23px;
             margin: auto;
             cursor: pointer;
             background: {
                 color: transparent;
                 size: cover;
-                image: url('../images/bin.svg');
             }
             border: 0;
             opacity: 0.5;
@@ -62,6 +75,36 @@
             &:hover,
             &:focus {
                 opacity: 1;
+            }
+
+            &:focus {
+                outline: 0;
+            }
+        }
+
+        .delete-task {
+            right: 25px;
+            width: 22px;
+            height: 23px;
+            background: {
+                image: url('../images/bin.svg');
+            }
+
+            @include media-query(mobile) {
+                right: 15px;
+            }
+        }
+
+        .edit-task {
+            right: 65px;
+            width: 23px;
+            height: 23px;
+            background: {
+                image: url('../images/edit.svg');
+            }
+
+            @include media-query(mobile) {
+                right: 50px;
             }
         }
     }
@@ -83,7 +126,7 @@
     }
 
     width: 57%;
-    padding: 10px;
+    padding: 10px 10px 10px 0;
     margin: 30px auto 0;
     color: #fff;
     background-color: transparent;
