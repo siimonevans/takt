@@ -15,7 +15,10 @@ function tempo() {
             $taskProject        = $('.task-project'),
             $taskForm           = $('.task-form'),
             $timerWrapper       = $('.timer-wrapper'),
-            $modal              = $('.modal');
+            $modal              = $('.modal'),
+            $modalClose         = $('.modal__close'),
+            $modalTitle         = $('.modal__title'),
+            $modalProject       = $('.modal__project');
 
         let timerTime           = 0,
             interval            = null,
@@ -124,6 +127,13 @@ function tempo() {
             updateTimeList();
         }
 
+        function populateModal(title, project, time) {
+            console.log(title + project + time);
+            $modalTitle.val(title);
+            $modalProject.val(project);
+            showModal();
+        }
+
         function showModal() {
             $modal.fadeIn();
         }
@@ -133,15 +143,14 @@ function tempo() {
         }
 
         // Edit task in locaStorage
-        function editItem(item) {
-            showModal();
-            
+        function prepareModal(item) {  
+
             const data = JSON.parse(localStorage.getItem('storageString')),
                 clickedItem = item.parent().attr('data-name');
 
             $.each(data, function(i) {
                 if (data[i].title == clickedItem) {
-                    data[i].title = '';
+                    populateModal(data[i].title, data[i].project, data[i].time);
                     localStorage.setItem('storageString', JSON.stringify(data));
                     return false;
                 }
@@ -204,16 +213,18 @@ function tempo() {
             });
 
             // Remove task
-            $('body').on('click', '.time-list li .delete-task', function () {
+            $(document).on('click', '.time-list li .delete-task', function () {
                 var item = $(this);
                 deleteItem(item);
             });
 
             // Edit task
-            $('body').on('click', '.time-list li .edit-task', function () {
+            $(document).on('click', '.time-list li .edit-task', function () {
                 var item = $(this);
-                editItem(item);
+                prepareModal(item);
             });
+
+            $modalClose.on('click', () => hideModal());
         }
 
         eventHandler();
