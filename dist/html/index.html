@@ -37,12 +37,16 @@
     <div class="app app--main">
       <div class="modal">
         <div class="modal__inner">
-          <label>Task title</label>
-          <input type="text" class="modal__title" placeholder="Task name&hellip;">
+          <form class="modal__form">
+            <label>Task title</label>
+            <input type="text" class="modal__title" placeholder="Task name&hellip;">
 
-          <label>Task project</label>
-          <input type="text" class="modal__project" placeholder="Task project&hellip;">
-          <button class="button modal__close"></button>
+            <label>Task project</label>
+            <input type="text" class="modal__project" placeholder="Task project&hellip;">
+            <button class="button modal__cancel">Cancel </button>
+            <input type="submit" class="button modal__save" value="Save">
+          </form>
+          <button class="button modal__cancel modal__close"></button>
         </div>
       </div>
       <a href="https://github.com/SimonDEvans/tempo" class="info">

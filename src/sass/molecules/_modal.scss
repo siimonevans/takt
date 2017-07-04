@@ -20,6 +20,15 @@
         margin: auto;
         border: 1px solid #2c245a;
         transform: translateY(-50%);
+
+        @include media-query(tablet) {
+            position: static;
+            top: auto;
+            width: 100%;
+            padding: 30px;
+            border: 0;
+            transform: none;
+        }
     }
 
     label {
@@ -31,7 +40,7 @@
         text-transform: uppercase;
     }
 
-    input {
+    input[type='text'] {
         @include placeholder-text {
             color: #f0eef9;
             transition: color $default-transition-speed ease;
@@ -57,6 +66,18 @@
 
         &:last-of-type {
             margin-bottom: 0;
+        }
+    }
+
+    &__save {
+        margin-bottom: 0;
+    }
+
+    &__cancel {
+        margin-bottom: 0;
+
+        @include media-query(tablet) {
+            margin-bottom: 15px;
         }
     }
 
@@ -97,6 +118,10 @@
 
         &::after {
             transform: rotate(45deg);
+        }
+
+        @include media-query(tablet) {
+            display: none;
         }
     }
 }
