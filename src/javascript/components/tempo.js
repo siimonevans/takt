@@ -14,7 +14,8 @@ function tempo() {
             $taskLabel          = $('.task-label'),
             $taskProject        = $('.task-project'),
             $taskForm           = $('.task-form'),
-            $timerWrapper       = $('.timer-wrapper');
+            $timerWrapper       = $('.timer-wrapper'),
+            $modal              = $('.modal');
 
         let timerTime           = 0,
             interval            = null,
@@ -109,11 +110,38 @@ function tempo() {
         // Remove tasks from locaStorage
         function deleteItem(item) {
             const data = JSON.parse(localStorage.getItem('storageString')),
-                clickedItem = item.attr('data-name');
+                clickedItem = item.parent().attr('data-name');
 
             $.each(data, function(i) {
                 if (data[i].title == clickedItem) {
                     data.splice(i, 1);
+                    localStorage.setItem('storageString', JSON.stringify(data));
+                    return false;
+                }
+            });
+
+            // Update task list to show localStorage data
+            updateTimeList();
+        }
+
+        function showModal() {
+            $modal.fadeIn();
+        }
+
+        function hideModal() {
+            $modal.fadeOut();
+        }
+
+        // Edit task in locaStorage
+        function editItem(item) {
+            showModal();
+            
+            const data = JSON.parse(localStorage.getItem('storageString')),
+                clickedItem = item.parent().attr('data-name');
+
+            $.each(data, function(i) {
+                if (data[i].title == clickedItem) {
+                    data[i].title = '';
                     localStorage.setItem('storageString', JSON.stringify(data));
                     return false;
                 }
@@ -145,9 +173,9 @@ function tempo() {
                     let seconds = totalTime[1];
 
                     if ( minutes == 0 ) {
-                        $('.time-list').append('<li><button data-name="'+ data[i].title +'"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task project: <span>' + data[i].project + '</span></div><div>Task duration: <span>'+ seconds +' seconds</span></div></li>');
+                        $('.time-list').append('<li data-name="'+ data[i].title +'"><button class="edit-task">Edit</button><button class="delete-task"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task project: <span>' + data[i].project + '</span></div><div>Task duration: <span>'+ seconds +' seconds</span></div></li>');
                     } else {
-                        $('.time-list').append('<li><button data-name="'+ data[i].title +'"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task project: <span>' + data[i].project + '</span></div><div>Task duration: <span>'+ minutes +' minutes and '+ seconds +' seconds</span></div></li>');
+                        $('.time-list').append('<li data-name="'+ data[i].title +'"><button class="edit-task">Edit</button><button class="delete-task"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task project: <span>' + data[i].project + '</span></div><div>Task duration: <span>'+ minutes +' minutes and '+ seconds +' seconds</span></div></li>');
                     }
                 }
 
@@ -176,9 +204,15 @@ function tempo() {
             });
 
             // Remove task
-            $('body').on('click', '.time-list li button', function () {
+            $('body').on('click', '.time-list li .delete-task', function () {
                 var item = $(this);
                 deleteItem(item);
+            });
+
+            // Edit task
+            $('body').on('click', '.time-list li .edit-task', function () {
+                var item = $(this);
+                editItem(item);
             });
         }
 

@@ -840,7 +840,7 @@ small, .milli {
   text-transform: none;
 }
 
-.time-list li button {
+.time-list li .delete-task {
   position: absolute;
   top: 0;
   right: 25px;
@@ -857,7 +857,7 @@ small, .milli {
   transition: opacity 300ms ease;
 }
 
-.time-list li button:hover, .time-list li button:focus {
+.time-list li .delete-task:hover, .time-list li .delete-task:focus {
   opacity: 1;
 }
 

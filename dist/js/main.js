@@ -3455,8 +3455,6 @@ var jquery = createCommonjsModule(function (module) {
     });
 });
 
-// We have to manually make jQuery a global variable.
-// By default it will be in a closure and renamed to lowercase.
 window.jQuery = jquery;
 
 function tempo() {
@@ -3473,7 +3471,8 @@ function tempo() {
             $taskLabel = jquery('.task-label'),
             $taskProject = jquery('.task-project'),
             $taskForm = jquery('.task-form'),
-            $timerWrapper = jquery('.timer-wrapper');
+            $timerWrapper = jquery('.timer-wrapper'),
+            $modal = jquery('.modal');
 
         var timerTime = 0,
             interval = null,
@@ -3568,11 +3567,38 @@ function tempo() {
         // Remove tasks from locaStorage
         function deleteItem(item) {
             var data = JSON.parse(localStorage.getItem('storageString')),
-                clickedItem = item.attr('data-name');
+                clickedItem = item.parent().attr('data-name');
 
             jquery.each(data, function (i) {
                 if (data[i].title == clickedItem) {
                     data.splice(i, 1);
+                    localStorage.setItem('storageString', JSON.stringify(data));
+                    return false;
+                }
+            });
+
+            // Update task list to show localStorage data
+            updateTimeList();
+        }
+
+        function showModal() {
+            $modal.fadeIn();
+        }
+
+        function hideModal() {
+            $modal.fadeOut();
+        }
+
+        // Edit task in locaStorage
+        function editItem(item) {
+            showModal();
+
+            var data = JSON.parse(localStorage.getItem('storageString')),
+                clickedItem = item.parent().attr('data-name');
+
+            jquery.each(data, function (i) {
+                if (data[i].title == clickedItem) {
+                    data[i].title = '';
                     localStorage.setItem('storageString', JSON.stringify(data));
                     return false;
                 }
@@ -3604,9 +3630,9 @@ function tempo() {
                     var _seconds = totalTime[1];
 
                     if (_minutes == 0) {
-                        jquery('.time-list').append('<li><button data-name="' + data[i].title + '"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task project: <span>' + data[i].project + '</span></div><div>Task duration: <span>' + _seconds + ' seconds</span></div></li>');
+                        jquery('.time-list').append('<li data-name="' + data[i].title + '"><button class="edit-task">Edit</button><button class="delete-task"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task project: <span>' + data[i].project + '</span></div><div>Task duration: <span>' + _seconds + ' seconds</span></div></li>');
                     } else {
-                        jquery('.time-list').append('<li><button data-name="' + data[i].title + '"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task project: <span>' + data[i].project + '</span></div><div>Task duration: <span>' + _minutes + ' minutes and ' + _seconds + ' seconds</span></div></li>');
+                        jquery('.time-list').append('<li data-name="' + data[i].title + '"><button class="edit-task">Edit</button><button class="delete-task"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task project: <span>' + data[i].project + '</span></div><div>Task duration: <span>' + _minutes + ' minutes and ' + _seconds + ' seconds</span></div></li>');
                     }
                 }
 
@@ -3635,9 +3661,15 @@ function tempo() {
             });
 
             // Remove task
-            jquery('body').on('click', '.time-list li button', function () {
+            jquery('body').on('click', '.time-list li .delete-task', function () {
                 var item = jquery(this);
                 deleteItem(item);
+            });
+
+            // Edit task
+            jquery('body').on('click', '.time-list li .edit-task', function () {
+                var item = jquery(this);
+                editItem(item);
             });
         }
 
@@ -3670,9 +3702,9 @@ function getLocalStorage() {
                     var seconds = totalTime[1];
 
                     if (minutes == 0) {
-                        jquery('.time-list').append('<li><button data-name="' + data[i].title + '"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task project: <span>' + data[i].project + '</span></div><div>Task duration: <span>' + seconds + ' seconds</span></div></li>');
+                        jquery('.time-list').append('<li><button class="edit-task">Edit</button><button class="delete-task" data-name="' + data[i].title + '"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task project: <span>' + data[i].project + '</span></div><div>Task duration: <span>' + seconds + ' seconds</span></div></li>');
                     } else {
-                        jquery('.time-list').append('<li><button data-name="' + data[i].title + '"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task project: <span>' + data[i].project + '</span></div><div>Task duration: <span>' + minutes + ' minutes and ' + seconds + ' seconds</span></div></li>');
+                        jquery('.time-list').append('<li><button class="edit-task">Edit</button><button class="delete-task" data-name="' + data[i].title + '"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task project: <span>' + data[i].project + '</span></div><div>Task duration: <span>' + minutes + ' minutes and ' + seconds + ' seconds</span></div></li>');
                     }
                 }
 
