@@ -43,6 +43,8 @@ function tempo() {
             // Update UI
             $timerWrapper.removeClass('timer-wrapper--running');
             $('.loader').addClass('loader--paused');
+
+            document.title = 'Tempo';
         }
 
         // Reset timer to zero
@@ -57,11 +59,13 @@ function tempo() {
         // Increment timer
         function incrementTimer() {
             const numOfMinutes = Math.floor(timerTime / 60),
-                numOfSeconds = timerTime % 60;
+                numOfSeconds = (timerTime % 60) + 1;
 
             timerTime = timerTime + 1;
             seconds.innerText = numOfSeconds >= 10 ? numOfSeconds : '0' + numOfSeconds;
             minutes.innerText = numOfMinutes >= 10 ? numOfMinutes : '0' + numOfMinutes;
+
+            document.title = $('.timer .minutes').text() + ':' + $('.timer .seconds').text();
         }
 
         // Get timer value

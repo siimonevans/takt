@@ -3455,8 +3455,6 @@ var jquery = createCommonjsModule(function (module) {
     });
 });
 
-// We have to manually make jQuery a global variable.
-// By default it will be in a closure and renamed to lowercase.
 window.jQuery = jquery;
 
 function tempo() {
@@ -3502,6 +3500,8 @@ function tempo() {
             // Update UI
             $timerWrapper.removeClass('timer-wrapper--running');
             jquery('.loader').addClass('loader--paused');
+
+            document.title = 'Tempo';
         }
 
         // Reset timer to zero
@@ -3516,11 +3516,13 @@ function tempo() {
         // Increment timer
         function incrementTimer() {
             var numOfMinutes = Math.floor(timerTime / 60),
-                numOfSeconds = timerTime % 60;
+                numOfSeconds = timerTime % 60 + 1;
 
             timerTime = timerTime + 1;
             seconds.innerText = numOfSeconds >= 10 ? numOfSeconds : '0' + numOfSeconds;
             minutes.innerText = numOfMinutes >= 10 ? numOfMinutes : '0' + numOfMinutes;
+
+            document.title = jquery('.timer .minutes').text() + ':' + jquery('.timer .seconds').text();
         }
 
         // Get timer value
