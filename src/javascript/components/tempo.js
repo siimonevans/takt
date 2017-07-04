@@ -59,7 +59,7 @@ function tempo() {
         // Increment timer
         function incrementTimer() {
             const numOfMinutes = Math.floor(timerTime / 60),
-                numOfSeconds = (timerTime % 60) + 1;
+                numOfSeconds = timerTime % 60;
 
             timerTime = timerTime + 1;
             seconds.innerText = numOfSeconds >= 10 ? numOfSeconds : '0' + numOfSeconds;
