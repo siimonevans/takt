@@ -41,19 +41,16 @@
             text-transform: none;
         }
 
+        .edit-task,
         .delete-task {
             position: absolute;
             top: 0;
-            right: 25px;
             bottom: 0;
-            width: 22px;
-            height: 23px;
             margin: auto;
             cursor: pointer;
             background: {
                 color: transparent;
                 size: cover;
-                image: url('../images/bin.svg');
             }
             border: 0;
             opacity: 0.5;
@@ -62,6 +59,28 @@
             &:hover,
             &:focus {
                 opacity: 1;
+            }
+
+            &:focus {
+                outline: 0;
+            }
+        }
+
+        .delete-task {
+            right: 25px;
+            width: 22px;
+            height: 23px;
+            background: {
+                image: url('../images/bin.svg');
+            }
+        }
+
+        .edit-task {
+            right: 65px;
+            width: 23px;
+            height: 23px;
+            background: {
+                image: url('../images/edit.svg');
             }
         }
     }
@@ -83,7 +102,7 @@
     }
 
     width: 57%;
-    padding: 10px;
+    padding: 10px 10px 10px 0;
     margin: 30px auto 0;
     color: #fff;
     background-color: transparent;
