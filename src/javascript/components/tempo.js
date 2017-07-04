@@ -16,9 +16,11 @@ function tempo() {
             $taskForm           = $('.task-form'),
             $timerWrapper       = $('.timer-wrapper'),
             $modal              = $('.modal'),
-            $modalClose         = $('.modal__close'),
+            $modalClose         = $('.modal__cancel'),
             $modalTitle         = $('.modal__title'),
-            $modalProject       = $('.modal__project');
+            $modalProject       = $('.modal__project'),
+            $modalSave          = $('.modal__save'),
+            $modalForm          = $('.modal__form');
 
         let timerTime           = 0,
             interval            = null,
@@ -127,10 +129,10 @@ function tempo() {
             updateTimeList();
         }
 
-        function populateModal(title, project, time) {
-            console.log(title + project + time);
+        function populateModal(title, project) {
             $modalTitle.val(title);
             $modalProject.val(project);
+            $modal.attr('data-name', title);
             showModal();
         }
 
@@ -142,9 +144,8 @@ function tempo() {
             $modal.fadeOut();
         }
 
-        // Edit task in locaStorage
+        // Prepare/populate modal
         function prepareModal(item) {  
-
             const data = JSON.parse(localStorage.getItem('storageString')),
                 clickedItem = item.parent().attr('data-name');
 
@@ -155,9 +156,26 @@ function tempo() {
                     return false;
                 }
             });
+        }
+
+        // Save modal contents
+        function saveModal() {
+            const data = JSON.parse(localStorage.getItem('storageString')),
+                currentItem = $modal.attr('data-name');
+
+            $.each(data, function(i) {
+                if (data[i].title == currentItem) {
+                    data[i].title = $modalTitle.val();
+                    data[i].project = $modalProject.val();
+                    localStorage.setItem('storageString', JSON.stringify(data));
+                    return false;
+                }
+            });
 
             // Update task list to show localStorage data
             updateTimeList();
+            hideModal();
+            return false;
         }
 
         // Remove all tasks from localStorage
@@ -225,6 +243,8 @@ function tempo() {
             });
 
             $modalClose.on('click', () => hideModal());
+            $modalForm.on('submit', () => saveModal());
+            $modalSave.on('click', () => saveModal());
         }
 
         eventHandler();
