@@ -1,5 +1,5 @@
 # Tempo
-<img src="https://sii.im/playground/tempo/tempo-ss.png" alt="Tempo app" width='350px'>
+<img src="https://sii.im/playground/tempo/tempo-ss-3.png" alt="Tempo app" width='750px'>
 
 Another time tracking app, [try it out here.](https://sii.im/playground/tempo)
 
