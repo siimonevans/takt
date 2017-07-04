@@ -5,8 +5,8 @@
   "display": "standalone",
   "orientation": "portrait",
   "start_url": "index.html",
-  "theme_color": "#120d2f",
-  "background_color": "#120d2f",
+  "theme_color": "#565075",
+  "background_color": "#565075",
   "icons": [
     {
       "src": "images/favicon/mstile-310x310.png",
