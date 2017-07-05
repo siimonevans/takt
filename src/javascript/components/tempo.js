@@ -20,7 +20,9 @@ function tempo() {
             $modalTitle         = $('.modal__title'),
             $modalProject       = $('.modal__project'),
             $modalSave          = $('.modal__save'),
-            $modalForm          = $('.modal__form');
+            $modalForm          = $('.modal__form'),
+            $modalMinutes       = $('.modal__minutes'),
+            $modalSeconds       = $('.modal__seconds');
 
         let timerTime           = 0,
             interval            = null,
@@ -78,11 +80,13 @@ function tempo() {
         function saveTimer() {
             const numOfMinutes      = Math.floor(timerTime / 60),
                 numOfSeconds        = timerTime % 60,
-                totalTime           = '' + numOfMinutes + ':' + numOfSeconds,
+                time                = '' + numOfMinutes + ':' + numOfSeconds,
+                minutes             = numOfMinutes,
+                seconds             = numOfSeconds,
                 label               = $taskLabel.val(),
                 project             = $taskProject.val();
 
-            addStoredItem(label, project, totalTime);
+            addStoredItem(label, project, time, minutes, seconds);
             updateTimeList();
             resetUI();
             resetTimer();
@@ -100,12 +104,14 @@ function tempo() {
 
         // Add tasks to localStorage
         // Save data in one long string for easier addition/removal/editing
-        function addStoredItem(title, project, time) {
+        function addStoredItem(title, project, time, minutes, seconds) {
             const existingItems = JSON.parse(localStorage.getItem('storageString')) || [];
             const newItem = {
                 title,
                 project,
-                time
+                time,
+                minutes,
+                seconds
             };
     
             existingItems.push(newItem);
@@ -129,9 +135,11 @@ function tempo() {
             updateTimeList();
         }
 
-        function populateModal(title, project) {
+        function populateModal(title, project, minutes, seconds) {
             $modalTitle.val(title);
             $modalProject.val(project);
+            $modalMinutes.val(minutes);
+            $modalSeconds.val(seconds);
             $modal.attr('data-name', title);
             showModal();
         }
@@ -151,7 +159,7 @@ function tempo() {
 
             $.each(data, function(i) {
                 if (data[i].title == clickedItem) {
-                    populateModal(data[i].title, data[i].project, data[i].time);
+                    populateModal(data[i].title, data[i].project, data[i].minutes, data[i].seconds);
                     localStorage.setItem('storageString', JSON.stringify(data));
                     return false;
                 }
@@ -167,6 +175,8 @@ function tempo() {
                 if (data[i].title == currentItem) {
                     data[i].title = $modalTitle.val();
                     data[i].project = $modalProject.val();
+                    data[i].minutes = $modalMinutes.val();
+                    data[i].seconds = $modalSeconds.val();
                     localStorage.setItem('storageString', JSON.stringify(data));
                     return false;
                 }
@@ -195,9 +205,8 @@ function tempo() {
                 const arrayLength = data.length;
 
                 for (var i = 0; i < arrayLength; i++) {
-                    let totalTime = (data[i].time).split(':');
-                    let minutes = totalTime[0];
-                    let seconds = totalTime[1];
+                    let minutes = data[i].minutes;
+                    let seconds = data[i].seconds;
 
                     if ( minutes == 0 ) {
                         $('.time-list').append('<li data-name="'+ data[i].title +'"><button class="edit-task"></button><button class="delete-task"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task project: <span>' + data[i].project + '</span></div><div>Task duration: <span>'+ seconds +' seconds</span></div></li>');

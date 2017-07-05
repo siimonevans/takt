@@ -3477,7 +3477,9 @@ function tempo() {
             $modalTitle = jquery('.modal__title'),
             $modalProject = jquery('.modal__project'),
             $modalSave = jquery('.modal__save'),
-            $modalForm = jquery('.modal__form');
+            $modalForm = jquery('.modal__form'),
+            $modalMinutes = jquery('.modal__minutes'),
+            $modalSeconds = jquery('.modal__seconds');
 
         var timerTime = 0,
             interval = null,
@@ -3535,11 +3537,13 @@ function tempo() {
         function saveTimer() {
             var numOfMinutes = Math.floor(timerTime / 60),
                 numOfSeconds = timerTime % 60,
-                totalTime = '' + numOfMinutes + ':' + numOfSeconds,
+                time = '' + numOfMinutes + ':' + numOfSeconds,
+                minutes = numOfMinutes,
+                seconds = numOfSeconds,
                 label = $taskLabel.val(),
                 project = $taskProject.val();
 
-            addStoredItem(label, project, totalTime);
+            addStoredItem(label, project, time, minutes, seconds);
             updateTimeList();
             resetUI();
             resetTimer();
@@ -3557,12 +3561,14 @@ function tempo() {
 
         // Add tasks to localStorage
         // Save data in one long string for easier addition/removal/editing
-        function addStoredItem(title, project, time) {
+        function addStoredItem(title, project, time, minutes, seconds) {
             var existingItems = JSON.parse(localStorage.getItem('storageString')) || [];
             var newItem = {
                 title: title,
                 project: project,
-                time: time
+                time: time,
+                minutes: minutes,
+                seconds: seconds
             };
 
             existingItems.push(newItem);
@@ -3586,9 +3592,11 @@ function tempo() {
             updateTimeList();
         }
 
-        function populateModal(title, project) {
+        function populateModal(title, project, minutes, seconds) {
             $modalTitle.val(title);
             $modalProject.val(project);
+            $modalMinutes.val(minutes);
+            $modalSeconds.val(seconds);
             $modal.attr('data-name', title);
             showModal();
         }
@@ -3608,7 +3616,7 @@ function tempo() {
 
             jquery.each(data, function (i) {
                 if (data[i].title == clickedItem) {
-                    populateModal(data[i].title, data[i].project, data[i].time);
+                    populateModal(data[i].title, data[i].project, data[i].minutes, data[i].seconds);
                     localStorage.setItem('storageString', JSON.stringify(data));
                     return false;
                 }
@@ -3624,6 +3632,8 @@ function tempo() {
                 if (data[i].title == currentItem) {
                     data[i].title = $modalTitle.val();
                     data[i].project = $modalProject.val();
+                    data[i].minutes = $modalMinutes.val();
+                    data[i].seconds = $modalSeconds.val();
                     localStorage.setItem('storageString', JSON.stringify(data));
                     return false;
                 }
@@ -3652,9 +3662,8 @@ function tempo() {
                 var arrayLength = data.length;
 
                 for (var i = 0; i < arrayLength; i++) {
-                    var totalTime = data[i].time.split(':');
-                    var _minutes = totalTime[0];
-                    var _seconds = totalTime[1];
+                    var _minutes = data[i].minutes;
+                    var _seconds = data[i].seconds;
 
                     if (_minutes == 0) {
                         jquery('.time-list').append('<li data-name="' + data[i].title + '"><button class="edit-task"></button><button class="delete-task"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task project: <span>' + data[i].project + '</span></div><div>Task duration: <span>' + _seconds + ' seconds</span></div></li>');
@@ -3734,9 +3743,8 @@ function getLocalStorage() {
 
             if (arrayLength !== 0) {
                 for (var i = 0; i < arrayLength; i++) {
-                    var totalTime = data[i].time.split(':');
-                    var minutes = totalTime[0];
-                    var seconds = totalTime[1];
+                    var minutes = data[i].minutes;
+                    var seconds = data[i].seconds;
 
                     if (minutes == 0) {
                         jquery('.time-list').append('<li data-name="' + data[i].title + '"><button class="edit-task"></button><button class="delete-task"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task project: <span>' + data[i].project + '</span></div><div>Task duration: <span>' + seconds + ' seconds</span></div></li>');
