@@ -15,7 +15,8 @@ self.addEventListener('install', function(event) {
         'timesheet.html',
         'js/main.js',
         'css/main.css',
-        'images/bin.svg'
+        'images/bin.svg',
+        'images/edit.svg'
       ]);
     })
   );
