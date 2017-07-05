@@ -10,9 +10,8 @@ function getLocalStorage() {
 
             if (arrayLength !== 0) {
                 for (var i = 0; i < arrayLength; i++) {
-                    let totalTime = (data[i].time).split(':');
-                    let minutes = totalTime[0];
-                    let seconds = totalTime[1];
+                    let minutes = data[i].minutes;
+                    let seconds = data[i].seconds;
 
                     if ( minutes == 0 ) {
                         $('.time-list').append('<li data-name="'+ data[i].title +'"><button class="edit-task"></button><button class="delete-task"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task project: <span>' + data[i].project + '</span></div><div>Task duration: <span>'+ seconds +' seconds</span></div></li>');
