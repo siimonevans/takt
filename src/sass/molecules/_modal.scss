@@ -12,6 +12,10 @@
     height: 100%;
     background-color: #120d2f;
 
+    @include media-query(tablet) {
+        overflow: auto;
+    }
+
     &__inner {
         position: relative;
         top: 50%;
@@ -25,7 +29,7 @@
             position: static;
             top: auto;
             width: 100%;
-            padding: 30px;
+            padding: 50px 30px 30px;
             border: 0;
             transform: none;
         }
@@ -40,7 +44,8 @@
         text-transform: uppercase;
     }
 
-    input[type='text'] {
+    input[type='text'],
+    input[type='number'] {
         @include placeholder-text {
             color: #f0eef9;
             transition: color $default-transition-speed ease;

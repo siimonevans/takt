@@ -22,7 +22,8 @@ function tempo() {
             $modalSave          = $('.modal__save'),
             $modalForm          = $('.modal__form'),
             $modalMinutes       = $('.modal__minutes'),
-            $modalSeconds       = $('.modal__seconds');
+            $modalSeconds       = $('.modal__seconds'),
+            mobileBreakpoint    = 650;
 
         let timerTime           = 0,
             interval            = null,
@@ -33,8 +34,12 @@ function tempo() {
             if (!isRunning) {
                 isRunning = true;
                 interval = setInterval(incrementTimer, 1000);
-                $taskLabel.focus();
                 $('.loader').removeClass('loader--paused');
+
+                // Only focus input on tablet+
+                if ($(window).width() > mobileBreakpoint) {
+                    $taskLabel.focus();
+                }
             }
 
             // Update UI

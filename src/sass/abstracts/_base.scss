@@ -60,5 +60,9 @@ a {
         padding: 30px 50px;
         overflow: auto;
         background-color: #120d2f;
+
+        @include media-query(tablet) {
+            padding: 30px;
+        }
     }
 }

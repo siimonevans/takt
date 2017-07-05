@@ -546,6 +546,12 @@ a {
   background-color: #120d2f;
 }
 
+@media only screen and (max-width: 700px) {
+  .app--timesheet {
+    padding: 30px;
+  }
+}
+
 /*------------------------------------*    $TYPOGRAPHY
 \*------------------------------------*/
 /* ============================================
@@ -687,8 +693,8 @@ small, .milli {
 @media only screen and (max-width: 650px) {
   .info {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 15px;
+    right: 15px;
     z-index: 2;
   }
 }
@@ -732,6 +738,7 @@ small, .milli {
   .task-area {
     width: 100%;
     height: auto;
+    min-height: 100vh;
   }
 }
 
@@ -758,6 +765,8 @@ small, .milli {
   .timer-area {
     width: 100%;
     height: auto;
+    min-height: 100vh;
+    padding: 60px 30px 30px;
   }
 }
 
@@ -869,7 +878,8 @@ small, .milli {
   margin: auto;
   cursor: pointer;
   background-color: transparent;
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
   border: 0;
   opacity: 0.5;
   transition: opacity 300ms ease;
@@ -889,7 +899,7 @@ small, .milli {
 .time-list li .delete-task {
   right: 25px;
   width: 22px;
-  height: 23px;
+  height: 22px;
   background-image: url("../images/bin.svg");
 }
 
@@ -1165,6 +1175,12 @@ small, .milli {
   background-color: #120d2f;
 }
 
+@media only screen and (max-width: 700px) {
+  .modal {
+    overflow: auto;
+  }
+}
+
 .modal__inner {
   position: relative;
   top: 50%;
@@ -1180,7 +1196,7 @@ small, .milli {
     position: static;
     top: auto;
     width: 100%;
-    padding: 30px;
+    padding: 50px 30px 30px;
     border: 0;
     transform: none;
   }
@@ -1195,7 +1211,8 @@ small, .milli {
   text-transform: uppercase;
 }
 
-.modal input[type='text'] {
+.modal input[type='text'],
+.modal input[type='number'] {
   width: 100%;
   padding: 10px;
   margin: 7px 0 30px;
@@ -1205,58 +1222,70 @@ small, .milli {
   transition: border-color 300ms ease;
 }
 
-.modal input[type='text'].placeholder {
+.modal input[type='text'].placeholder,
+.modal input[type='number'].placeholder {
   color: #f0eef9;
   transition: color 300ms ease;
 }
 
-.modal input[type='text']:-moz-placeholder {
+.modal input[type='text']:-moz-placeholder,
+.modal input[type='number']:-moz-placeholder {
   color: #f0eef9;
   transition: color 300ms ease;
 }
 
-.modal input[type='text']::-moz-placeholder {
+.modal input[type='text']::-moz-placeholder,
+.modal input[type='number']::-moz-placeholder {
   color: #f0eef9;
   transition: color 300ms ease;
 }
 
-.modal input[type='text']:-ms-input-placeholder {
+.modal input[type='text']:-ms-input-placeholder,
+.modal input[type='number']:-ms-input-placeholder {
   color: #f0eef9;
   transition: color 300ms ease;
 }
 
-.modal input[type='text']::-webkit-input-placeholder {
+.modal input[type='text']::-webkit-input-placeholder,
+.modal input[type='number']::-webkit-input-placeholder {
   color: #f0eef9;
   transition: color 300ms ease;
 }
 
-.modal input[type='text']:focus {
+.modal input[type='text']:focus,
+.modal input[type='number']:focus {
   color: #f0eef9;
   border-color: #a8a0ca;
   outline: 0;
 }
 
-.modal input[type='text']:focus.placeholder {
+.modal input[type='text']:focus.placeholder,
+.modal input[type='number']:focus.placeholder {
   color: #a8a0ca;
 }
 
-.modal input[type='text']:focus:-moz-placeholder {
+.modal input[type='text']:focus:-moz-placeholder,
+.modal input[type='number']:focus:-moz-placeholder {
   color: #a8a0ca;
 }
 
-.modal input[type='text']:focus::-moz-placeholder {
+.modal input[type='text']:focus::-moz-placeholder,
+.modal input[type='number']:focus::-moz-placeholder {
   color: #a8a0ca;
 }
 
-.modal input[type='text']:focus:-ms-input-placeholder {
+.modal input[type='text']:focus:-ms-input-placeholder,
+.modal input[type='number']:focus:-ms-input-placeholder {
   color: #a8a0ca;
 }
 
-.modal input[type='text']:focus::-webkit-input-placeholder {
+.modal input[type='text']:focus::-webkit-input-placeholder,
+.modal input[type='number']:focus::-webkit-input-placeholder {
   color: #a8a0ca;
 }
 
-.modal input[type='text']:last-of-type {
+.modal input[type='text']:last-of-type,
+.modal input[type='number']:last-of-type {
   margin-bottom: 0;
 }
 
