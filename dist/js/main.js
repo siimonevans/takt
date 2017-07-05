@@ -3455,6 +3455,8 @@ var jquery = createCommonjsModule(function (module) {
     });
 });
 
+// We have to manually make jQuery a global variable.
+// By default it will be in a closure and renamed to lowercase.
 window.jQuery = jquery;
 
 function tempo() {
@@ -3479,7 +3481,8 @@ function tempo() {
             $modalSave = jquery('.modal__save'),
             $modalForm = jquery('.modal__form'),
             $modalMinutes = jquery('.modal__minutes'),
-            $modalSeconds = jquery('.modal__seconds');
+            $modalSeconds = jquery('.modal__seconds'),
+            mobileBreakpoint = 650;
 
         var timerTime = 0,
             interval = null,
@@ -3490,8 +3493,12 @@ function tempo() {
             if (!isRunning) {
                 isRunning = true;
                 interval = setInterval(incrementTimer, 1000);
-                $taskLabel.focus();
                 jquery('.loader').removeClass('loader--paused');
+
+                // Only focus input on tablet+
+                if (jquery(window).width() > mobileBreakpoint) {
+                    $taskLabel.focus();
+                }
             }
 
             // Update UI
