@@ -1,7 +1,7 @@
-import tempo from './components/tempo';
+import takt from './components/takt';
 import getLocalStorage from './components/get-localstorage';
 import timesheet from './components/timesheet';
 
-tempo();
+takt();
 getLocalStorage();
 timesheet();
