@@ -1,7 +1,7 @@
-# Tempo
-<img src="https://sii.im/playground/tempo/tempo-ss-3.png" alt="Tempo app" width='750px'>
+# Takt
+<img src="https://sii.im/playground/takt/takt-ss.png" alt="Takt app" width='750px'>
 
-Another time tracking app, [try it out here.](https://sii.im/playground/tempo)
+Another time tracking app, [try it out here.](https://sii.im/playground/takt)
 
 Features:
 - Add new tasks with a title and relevant project name
@@ -17,4 +17,4 @@ Limitations:
 
 Bundled with a Service Worker for offline support, and made as PWA-y as possible:
 
-<img src="https://sii.im/playground/tempo/tempo-lighthouse.png" alt="Tempo app lighthouse score" width='200px'>
+<img src="https://sii.im/playground/takt/takt-lighthouse.png" alt="Takt app lighthouse score" width='200px'>
