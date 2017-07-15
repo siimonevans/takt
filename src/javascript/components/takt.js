@@ -1,6 +1,6 @@
 import $ from '../globals';
 
-function tempo() {
+function takt() {
     
     function timer() {
         const $startButton      = document.querySelector('[data-action="start"]'),
@@ -57,7 +57,7 @@ function tempo() {
             $timerWrapper.removeClass('timer-wrapper--running');
             $('.loader').addClass('loader--paused');
 
-            document.title = 'Tempo';
+            document.title = 'takt';
         }
 
         // Reset timer to zero
@@ -273,4 +273,4 @@ function tempo() {
     bindEvents();
 }
     
-export default tempo;
+export default takt;

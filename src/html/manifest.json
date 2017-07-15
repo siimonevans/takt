@@ -1,6 +1,6 @@
 {
-  "short_name": "Tempo",
-  "name": "Tempo",
+  "short_name": "Takt",
+  "name": "Takt",
   "description" : "Time tracking",
   "display": "standalone",
   "orientation": "portrait",
