@@ -1,10 +1,10 @@
 {
-  "name": "Tempo",
+  "name": "Takt",
   "version": "0.0.0",
   "author": "Simon Evans",
   "repository": {
     "type": "git",
-    "url": "https://github.com/SimonDEvans/tempo"
+    "url": "https://github.com/SimonDEvans/takt"
   },
   "browserslist": [
     "> 3%",
