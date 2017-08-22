@@ -57,7 +57,7 @@ function takt() {
             $timerWrapper.removeClass('timer-wrapper--running');
             $('.loader').addClass('loader--paused');
 
-            document.title = 'takt';
+            document.title = 'Takt';
         }
 
         // Reset timer to zero
