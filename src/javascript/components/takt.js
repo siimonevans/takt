@@ -13,16 +13,20 @@ function takt() {
             $taskProject        = document.querySelectorAll('.task-project'),
             $taskForm           = document.querySelectorAll('.task-form'),
             $timerWrapper       = document.querySelectorAll('.timer-wrapper'),
+            $loader             = document.querySelectorAll('.loader'),
+            $currentTask        = document.querySelectorAll('.current-task'),
+            $currentTaskData    = document.querySelectorAll('.current-task__data'),
+            $timeList           = document.querySelectorAll('.time-list'),
             $modal              = document.querySelectorAll('.modal'),
-            $modalClose         = $('.modal__cancel'),
-            $modalTitle         = $('.modal__title'),
-            $modalProject       = $('.modal__project'),
-            $modalSave          = $('.modal__save'),
-            $modalForm          = $('.modal__form'),
-            $modalMinutes       = $('.modal__minutes'),
-            $modalSeconds       = $('.modal__seconds'),
-            minutes             = $('.minutes'),
-            seconds             = $('.seconds'),
+            $modalClose         = document.querySelectorAll('.modal__cancel'),
+            $modalTitle         = document.querySelectorAll('.modal__title'),
+            $modalProject       = document.querySelectorAll('.modal__project'),
+            $modalSave          = document.querySelectorAll('.modal__save'),
+            $modalForm          = document.querySelectorAll('.modal__form'),
+            $modalMinutes       = document.querySelectorAll('.modal__minutes'),
+            $modalSeconds       = document.querySelectorAll('.modal__seconds'),
+            minutes             = document.querySelectorAll('.minutes'),
+            seconds             = document.querySelectorAll('.seconds'),
             mobileBreakpoint    = 650;
 
         let timerTime           = 0,
@@ -34,10 +38,10 @@ function takt() {
             if (!isRunning) {
                 isRunning = true;
                 interval = setInterval(incrementTimer, 1000);
-                $('.loader').removeClass('loader--paused');
+                $loader[0].classList.remove('loader--paused');
 
                 // Only focus input on tablet+
-                if ($(window).width() > mobileBreakpoint) {
+                if (window.innerWidth > mobileBreakpoint) {
                     $taskLabel[0].focus();
                 }
             }
@@ -55,7 +59,7 @@ function takt() {
 
             // Update UI
             $timerWrapper[0].classList.remove('timer-wrapper--running');
-            $('.loader').addClass('loader--paused');
+            $loader[0].classList.add('loader--paused');
 
             document.title = 'Takt';
         }
@@ -65,8 +69,8 @@ function takt() {
             stopTimer();
             resetUI();
             timerTime = 0;
-            seconds.innerText = '00';
-            minutes.innerText = '00';
+            seconds[0].innerText = '00';
+            minutes[0].innerText = '00';
         }
 
         // Increment timer
@@ -75,8 +79,8 @@ function takt() {
                 numOfSeconds = timerTime % 60;
 
             timerTime = timerTime + 1;
-            seconds.innerText = numOfSeconds >= 10 ? numOfSeconds : '0' + numOfSeconds;
-            minutes.innerText = numOfMinutes >= 10 ? numOfMinutes : '0' + numOfMinutes;
+            seconds[0].innerText = numOfSeconds >= 10 ? numOfSeconds : '0' + numOfSeconds;
+            minutes[0].innerText = numOfMinutes >= 10 ? numOfMinutes : '0' + numOfMinutes;
 
             document.title = $('.timer .minutes').text() + ':' + $('.timer .seconds').text();
         }
@@ -102,8 +106,8 @@ function takt() {
             $taskLabel[0].value = '';
             $taskProject[0].value = '';
             $taskForm[0].classList.remove('task-form--show');
-            $('.current-task__data').html('');
-            $('.current-task').hide();
+            $currentTaskData[0].innerHTML = '';
+            $currentTask[0].style.display = 'none';
             $controls[0].classList.remove('controls--running');
         }
 
@@ -141,10 +145,10 @@ function takt() {
         }
 
         function populateModal(title, project, minutes, seconds) {
-            $modalTitle.val(title);
-            $modalProject.val(project);
-            $modalMinutes.val(minutes);
-            $modalSeconds.val(seconds);
+            $modalTitle[0].value = title;
+            $modalProject[0].value = project;
+            $modalMinutes[0].value = minutes;
+            $modalSeconds[0].value = seconds;
             $modal[0].setAttribute('data-name', title);
             showModal();
         }
@@ -178,10 +182,10 @@ function takt() {
 
             $.each(data, function(i) {
                 if (data[i].title == currentItem) {
-                    data[i].title = $modalTitle.val();
-                    data[i].project = $modalProject.val();
-                    data[i].minutes = $modalMinutes.val();
-                    data[i].seconds = $modalSeconds.val();
+                    data[i].title = $modalTitle[0].value;
+                    data[i].project = $modalProject[0].value;
+                    data[i].minutes = $modalMinutes[0].value;
+                    data[i].seconds = $modalSeconds[0].value;
                     localStorage.setItem('storageString', JSON.stringify(data));
                     return false;
                 }
@@ -203,7 +207,7 @@ function takt() {
         function updateTimeList() {
 
             // Empty list contents
-            $('.time-list').html('');
+            $timeList[0].innerHTML = '';
 
             if (localStorage.getItem('storageString')) {
                 const data = JSON.parse(localStorage.getItem('storageString'));
@@ -240,8 +244,8 @@ function takt() {
             // Set current task
             $taskForm[0].addEventListener('submit', function(e) {
                 e.preventDefault();
-                $('.current-task').show();
-                $('.current-task__data').html('<div>' + $taskLabel[0].value + '</div><div>' + $taskProject[0].value + '</div>');
+                $currentTask[0].style.display = 'block';
+                $currentTaskData[0].innerHTML = '<div>' + $taskLabel[0].value + '</div><div>' + $taskProject[0].value + '</div>';
             });
 
             // Remove task
@@ -256,9 +260,15 @@ function takt() {
                 prepareModal(item);
             });
 
-            $modalClose.on('click', () => hideModal());
-            $modalForm.on('submit', () => saveModal());
-            $modalSave.on('click', () => saveModal());
+            $modalClose[0].addEventListener('click', hideModal());
+            $modalForm[0].addEventListener('submit', function(e) {
+                e.preventDefault();
+                saveModal();
+            });
+            $modalSave[0].addEventListener('click', function(e) {
+                e.preventDefault();
+                saveModal();
+            });
         }
 
         eventHandler();
@@ -267,7 +277,7 @@ function takt() {
     function bindEvents() {
         document.addEventListener('DOMContentLoaded', function () {
             if ($('.app--main').length) {
-                $(window).on('load', () => timer());
+                timer();
             }
         });
     }
