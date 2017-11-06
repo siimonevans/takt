@@ -215,7 +215,7 @@ function takt() {
                 const data = JSON.parse(localStorage.getItem('storageString'));
                 const arrayLength = data.length;
 
-                for (var i = 0; i < arrayLength; i++) {
+                for (let i = 0; i < arrayLength; i++) {
                     let minutes = data[i].minutes;
                     let seconds = data[i].seconds;
 

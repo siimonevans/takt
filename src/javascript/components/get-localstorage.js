@@ -11,7 +11,7 @@ function getLocalStorage() {
             const arrayLength = data.length;
 
             if (arrayLength !== 0) {
-                for (var i = 0; i < arrayLength; i++) {
+                for (let i = 0; i < arrayLength; i++) {
                     let minutes = data[i].minutes;
                     let seconds = data[i].seconds;
 
