@@ -3460,17 +3460,17 @@ window.jQuery = jquery;
 function takt() {
 
     function timer() {
-        var $startButton = jquery('.start'),
-            $stopButton = jquery('.stop'),
-            $resetButton = jquery('.cancel'),
-            $saveButton = jquery('.finish'),
-            $clearButton = jquery('.clear'),
-            $controls = jquery('.controls'),
-            $taskLabel = jquery('.task-label'),
-            $taskProject = jquery('.task-project'),
-            $taskForm = jquery('.task-form'),
-            $timerWrapper = jquery('.timer-wrapper'),
-            $modal = jquery('.modal'),
+        var $startButton = document.querySelectorAll('.start'),
+            $stopButton = document.querySelectorAll('.stop'),
+            $resetButton = document.querySelectorAll('.cancel'),
+            $saveButton = document.querySelectorAll('.finish'),
+            $clearButton = document.querySelectorAll('.clear'),
+            $controls = document.querySelectorAll('.controls'),
+            $taskLabel = document.querySelectorAll('.task-label'),
+            $taskProject = document.querySelectorAll('.task-project'),
+            $taskForm = document.querySelectorAll('.task-form'),
+            $timerWrapper = document.querySelectorAll('.timer-wrapper'),
+            $modal = document.querySelectorAll('.modal'),
             $modalClose = jquery('.modal__cancel'),
             $modalTitle = jquery('.modal__title'),
             $modalProject = jquery('.modal__project'),
@@ -3495,14 +3495,14 @@ function takt() {
 
                 // Only focus input on tablet+
                 if (jquery(window).width() > mobileBreakpoint) {
-                    $taskLabel.focus();
+                    $taskLabel[0].focus();
                 }
             }
 
             // Update UI
-            $controls.addClass('controls--running');
-            $taskForm.addClass('task-form--show');
-            $timerWrapper.addClass('timer-wrapper--running');
+            $controls[0].classList.add('controls--running');
+            $taskForm[0].classList.add('task-form--show');
+            $timerWrapper[0].classList.add('timer-wrapper--running');
         }
 
         // Stop timer
@@ -3511,7 +3511,7 @@ function takt() {
             clearInterval(interval);
 
             // Update UI
-            $timerWrapper.removeClass('timer-wrapper--running');
+            $timerWrapper[0].classList.remove('timer-wrapper--running');
             jquery('.loader').addClass('loader--paused');
 
             document.title = 'Takt';
@@ -3545,8 +3545,8 @@ function takt() {
                 time = '' + numOfMinutes + ':' + numOfSeconds,
                 minutes = numOfMinutes,
                 seconds = numOfSeconds,
-                label = $taskLabel.val(),
-                project = $taskProject.val();
+                label = $taskLabel[0].value,
+                project = $taskProject[0].value;
 
             addStoredItem(label, project, time, minutes, seconds);
             updateTimeList();
@@ -3556,12 +3556,12 @@ function takt() {
 
         // Reset UI
         function resetUI() {
-            $taskLabel.val('');
-            $taskProject.val('');
-            $taskForm.removeClass('task-form--show');
+            $taskLabel[0].value = '';
+            $taskProject[0].value = '';
+            $taskForm[0].classList.remove('task-form--show');
             jquery('.current-task__data').html('');
             jquery('.current-task').hide();
-            $controls.removeClass('controls--running');
+            $controls[0].classList.remove('controls--running');
         }
 
         // Add tasks to localStorage
@@ -3602,22 +3602,22 @@ function takt() {
             $modalProject.val(project);
             $modalMinutes.val(minutes);
             $modalSeconds.val(seconds);
-            $modal.attr('data-name', title);
+            $modal[0].setAttribute('data-name', title);
             showModal();
         }
 
         function showModal() {
-            $modal.fadeIn();
+            $modal[0].style.display = 'block';
         }
 
         function hideModal() {
-            $modal.fadeOut();
+            $modal[0].style.display = 'none';
         }
 
         // Prepare/populate modal
         function prepareModal(item) {
             var data = JSON.parse(localStorage.getItem('storageString')),
-                clickedItem = item.parent().attr('data-name');
+                clickedItem = item.closest('li')[0].getAttribute('data-name');
 
             jquery.each(data, function (i) {
                 if (data[i].title == clickedItem) {
@@ -3631,7 +3631,7 @@ function takt() {
         // Save modal contents
         function saveModal() {
             var data = JSON.parse(localStorage.getItem('storageString')),
-                currentItem = $modal.attr('data-name');
+                currentItem = $modal[0].getAttribute('data-name');
 
             jquery.each(data, function (i) {
                 if (data[i].title == currentItem) {
@@ -3688,17 +3688,17 @@ function takt() {
         }
 
         function eventHandler() {
-            $startButton.on('click', startTimer);
-            $stopButton.on('click', stopTimer);
-            $resetButton.on('click', resetTimer);
-            $saveButton.on('click', saveTimer);
-            $clearButton.on('click', clearData);
+            $startButton[0].addEventListener('click', startTimer);
+            $stopButton[0].addEventListener('click', stopTimer);
+            $resetButton[0].addEventListener('click', resetTimer);
+            $saveButton[0].addEventListener('click', saveTimer);
+            $clearButton[0].addEventListener('click', clearData);
 
             // Set current task
-            $taskForm.on('submit', function (e) {
+            $taskForm[0].addEventListener('submit', function (e) {
                 e.preventDefault();
                 jquery('.current-task').show();
-                jquery('.current-task__data').html('<div>' + $taskLabel.val() + '</div><div>' + $taskProject.val() + '</div>');
+                jquery('.current-task__data').html('<div>' + $taskLabel[0].value + '</div><div>' + $taskProject[0].value + '</div>');
             });
 
             // Remove task
@@ -3728,11 +3728,13 @@ function takt() {
     }
 
     function bindEvents() {
-        if (jquery('.app--main').length) {
-            jquery(window).on('load', function () {
-                return timer();
-            });
-        }
+        document.addEventListener('DOMContentLoaded', function () {
+            if (jquery('.app--main').length) {
+                jquery(window).on('load', function () {
+                    return timer();
+                });
+            }
+        });
     }
 
     bindEvents();
