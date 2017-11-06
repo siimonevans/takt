@@ -3,13 +3,11 @@ import $ from '../globals';
 function takt() {
     
     function timer() {
-        const $startButton      = document.querySelector('[data-action="start"]'),
-            $stopButton         = document.querySelector('[data-action="stop"]'),
-            $resetButton        = document.querySelector('[data-action="reset"]'),
-            $saveButton         = document.querySelector('[data-action="save"]'),
-            $clearButton        = document.querySelector('[data-action="clear-all"]'),
-            minutes             = document.querySelector('.minutes'),
-            seconds             = document.querySelector('.seconds'),
+        const $startButton      = $('.start'),
+            $stopButton         = $('.stop'),
+            $resetButton        = $('.cancel'),
+            $saveButton         = $('.finish'),
+            $clearButton        = $('.clear'),
             $controls           = $('.controls'),
             $taskLabel          = $('.task-label'),
             $taskProject        = $('.task-project'),
@@ -23,6 +21,8 @@ function takt() {
             $modalForm          = $('.modal__form'),
             $modalMinutes       = $('.modal__minutes'),
             $modalSeconds       = $('.modal__seconds'),
+            minutes             = $('.minutes'),
+            seconds             = $('.seconds'),
             mobileBreakpoint    = 650;
 
         let timerTime           = 0,
@@ -231,11 +231,11 @@ function takt() {
         }
 
         function eventHandler() {
-            $startButton.addEventListener('click', startTimer);
-            $stopButton.addEventListener('click', stopTimer);
-            $resetButton.addEventListener('click', resetTimer);
-            $saveButton.addEventListener('click', saveTimer);
-            $clearButton.addEventListener('click', clearData);
+            $startButton.on('click', startTimer);
+            $stopButton.on('click', stopTimer);
+            $resetButton.on('click', resetTimer);
+            $saveButton.on('click', saveTimer);
+            $clearButton.on('click', clearData);
 
             // Set current task
             $taskForm.on('submit', function(e) {
