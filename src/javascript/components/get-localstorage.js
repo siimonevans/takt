@@ -1,6 +1,8 @@
-import $ from '../globals';
-
 function getLocalStorage() {
+
+    const $timeList         = document.querySelectorAll('.time-list'),
+        $timeListMeta       = document.querySelectorAll('.time-list-meta'),
+        $completedTasks     = document.querySelectorAll('.task-area .completed-tasks');
 
     function getData() {
 
@@ -14,25 +16,24 @@ function getLocalStorage() {
                     let seconds = data[i].seconds;
 
                     if ( minutes == 0 ) {
-                        $('.time-list').append('<li data-name="'+ data[i].title +'"><button class="edit-task"></button><button class="delete-task"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task project: <span>' + data[i].project + '</span></div><div>Task duration: <span>'+ seconds +' seconds</span></div></li>');
+                        $timeList[0].innerHTML += '<li data-name="'+ data[i].title +'"><button class="edit-task"></button><button class="delete-task"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task project: <span>' + data[i].project + '</span></div><div>Task duration: <span>'+ seconds +' seconds</span></div></li>';
                     } else {
-                        $('.time-list').append('<li data-name="'+ data[i].title +'"><button class="edit-task"></button><button class="delete-task"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task project: <span>' + data[i].project + '</span></div><div>Task duration: <span>'+ minutes +' minutes and '+ seconds +' seconds</span></div></li>');
+                        $timeList[0].innerHTML +='<li data-name="'+ data[i].title +'"><button class="edit-task"></button><button class="delete-task"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task project: <span>' + data[i].project + '</span></div><div>Task duration: <span>'+ minutes +' minutes and '+ seconds +' seconds</span></div></li>';
                     }
                 }
                 
-                $('.task-area .completed-tasks').text('Completed tasks:');
-                $('.button.create').show();
-                $('.time-list-meta').addClass('time-list-meta--show');
+                $completedTasks[0].innerHTML = 'Completed tasks:';
+                $timeListMeta[0].classList.add('time-list-meta--show');
             }
         } else {
-            $('.task-area .completed-tasks').text('No completed tasks');
-            $('.time-list-meta').removeClass('time-list-meta--show');
+            $completedTasks[0].innerHTML = 'No completed tasks';
+            $timeListMeta[0].classList.remove('time-list-meta--show');
         }
     }
 
     function bindEvents() {
-        if ($('.app--main').length) {
-            $(window).on('load', () => getData());
+        if (document.querySelectorAll('.app--main')) {
+            getData();
         }
     }
 
