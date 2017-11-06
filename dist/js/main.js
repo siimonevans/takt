@@ -3455,20 +3455,16 @@ var jquery = createCommonjsModule(function (module) {
     });
 });
 
-// We have to manually make jQuery a global variable.
-// By default it will be in a closure and renamed to lowercase.
 window.jQuery = jquery;
 
 function takt() {
 
     function timer() {
-        var $startButton = document.querySelector('[data-action="start"]'),
-            $stopButton = document.querySelector('[data-action="stop"]'),
-            $resetButton = document.querySelector('[data-action="reset"]'),
-            $saveButton = document.querySelector('[data-action="save"]'),
-            $clearButton = document.querySelector('[data-action="clear-all"]'),
-            minutes = document.querySelector('.minutes'),
-            seconds = document.querySelector('.seconds'),
+        var $startButton = jquery('.start'),
+            $stopButton = jquery('.stop'),
+            $resetButton = jquery('.cancel'),
+            $saveButton = jquery('.finish'),
+            $clearButton = jquery('.clear'),
             $controls = jquery('.controls'),
             $taskLabel = jquery('.task-label'),
             $taskProject = jquery('.task-project'),
@@ -3482,6 +3478,8 @@ function takt() {
             $modalForm = jquery('.modal__form'),
             $modalMinutes = jquery('.modal__minutes'),
             $modalSeconds = jquery('.modal__seconds'),
+            minutes = jquery('.minutes'),
+            seconds = jquery('.seconds'),
             mobileBreakpoint = 650;
 
         var timerTime = 0,
@@ -3516,7 +3514,7 @@ function takt() {
             $timerWrapper.removeClass('timer-wrapper--running');
             jquery('.loader').addClass('loader--paused');
 
-            document.title = 'takt';
+            document.title = 'Takt';
         }
 
         // Reset timer to zero
@@ -3690,11 +3688,11 @@ function takt() {
         }
 
         function eventHandler() {
-            $startButton.addEventListener('click', startTimer);
-            $stopButton.addEventListener('click', stopTimer);
-            $resetButton.addEventListener('click', resetTimer);
-            $saveButton.addEventListener('click', saveTimer);
-            $clearButton.addEventListener('click', clearData);
+            $startButton.on('click', startTimer);
+            $stopButton.on('click', stopTimer);
+            $resetButton.on('click', resetTimer);
+            $saveButton.on('click', saveTimer);
+            $clearButton.on('click', clearData);
 
             // Set current task
             $taskForm.on('submit', function (e) {
