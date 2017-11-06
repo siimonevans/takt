@@ -1,5 +1,3 @@
-import $ from '../globals';
-
 function takt() {
     
     function timer() {
@@ -17,6 +15,9 @@ function takt() {
             $currentTask        = document.querySelectorAll('.current-task'),
             $currentTaskData    = document.querySelectorAll('.current-task__data'),
             $timeList           = document.querySelectorAll('.time-list'),
+            $timeListMeta       = document.querySelectorAll('.time-list-meta'),
+            $timerMinutes       = document.querySelectorAll('.timer .minutes'),
+            $timerSeconds       = document.querySelectorAll('.timer .seconds'),
             $modal              = document.querySelectorAll('.modal'),
             $modalClose         = document.querySelectorAll('.modal__cancel'),
             $modalTitle         = document.querySelectorAll('.modal__title'),
@@ -25,6 +26,7 @@ function takt() {
             $modalForm          = document.querySelectorAll('.modal__form'),
             $modalMinutes       = document.querySelectorAll('.modal__minutes'),
             $modalSeconds       = document.querySelectorAll('.modal__seconds'),
+            $completedTasks     = document.querySelectorAll('.task-area .completed-tasks'),
             minutes             = document.querySelectorAll('.minutes'),
             seconds             = document.querySelectorAll('.seconds'),
             mobileBreakpoint    = 650;
@@ -82,7 +84,7 @@ function takt() {
             seconds[0].innerText = numOfSeconds >= 10 ? numOfSeconds : '0' + numOfSeconds;
             minutes[0].innerText = numOfMinutes >= 10 ? numOfMinutes : '0' + numOfMinutes;
 
-            document.title = $('.timer .minutes').text() + ':' + $('.timer .seconds').text();
+            document.title = $timerMinutes[0].innerHTML + ':' + $timerSeconds[0].innerHTML;
         }
 
         // Get timer value
@@ -130,9 +132,9 @@ function takt() {
         // Remove tasks from locaStorage
         function deleteItem(item) {
             const data = JSON.parse(localStorage.getItem('storageString')),
-                clickedItem = item.parent().attr('data-name');
+                clickedItem = item.closest('li').getAttribute('data-name');
 
-            $.each(data, function(i) {
+            Array.prototype.forEach.call(data, function(el, i) {
                 if (data[i].title == clickedItem) {
                     data.splice(i, 1);
                     localStorage.setItem('storageString', JSON.stringify(data));
@@ -164,9 +166,9 @@ function takt() {
         // Prepare/populate modal
         function prepareModal(item) {
             const data = JSON.parse(localStorage.getItem('storageString')),
-                clickedItem = item.closest('li')[0].getAttribute('data-name');
+                clickedItem = item.closest('li').getAttribute('data-name');
 
-            $.each(data, function(i) {
+            Array.prototype.forEach.call(data, function(el, i) {
                 if (data[i].title == clickedItem) {
                     populateModal(data[i].title, data[i].project, data[i].minutes, data[i].seconds);
                     localStorage.setItem('storageString', JSON.stringify(data));
@@ -180,7 +182,7 @@ function takt() {
             const data = JSON.parse(localStorage.getItem('storageString')),
                 currentItem = $modal[0].getAttribute('data-name');
 
-            $.each(data, function(i) {
+            Array.prototype.forEach.call(data, function(el, i) {
                 if (data[i].title == currentItem) {
                     data[i].title = $modalTitle[0].value;
                     data[i].project = $modalProject[0].value;
@@ -218,19 +220,17 @@ function takt() {
                     let seconds = data[i].seconds;
 
                     if ( minutes == 0 ) {
-                        $('.time-list').append('<li data-name="'+ data[i].title +'"><button class="edit-task"></button><button class="delete-task"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task project: <span>' + data[i].project + '</span></div><div>Task duration: <span>'+ seconds +' seconds</span></div></li>');
+                        $timeList[0].innerHTML += '<li data-name="'+ data[i].title +'"><button class="edit-task"></button><button class="delete-task"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task project: <span>' + data[i].project + '</span></div><div>Task duration: <span>'+ seconds +' seconds</span></div></li>';
                     } else {
-                        $('.time-list').append('<li data-name="'+ data[i].title +'"><button class="edit-task"></button><button class="delete-task"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task project: <span>' + data[i].project + '</span></div><div>Task duration: <span>'+ minutes +' minutes and '+ seconds +' seconds</span></div></li>');
+                        $timeList[0].innerHTML += '<li data-name="'+ data[i].title +'"><button class="edit-task"></button><button class="delete-task"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task project: <span>' + data[i].project + '</span></div><div>Task duration: <span>'+ minutes +' minutes and '+ seconds +' seconds</span></div></li>';
                     }
                 }
 
-                $('.task-area .completed-tasks').text('Completed tasks:');
-                $('.button.create').show();
-                $('.time-list-meta').addClass('time-list-meta--show');
+                $completedTasks[0].innerHTML = 'Completed tasks:';
+                $timeListMeta[0].classList.add('time-list-meta--show');
             } else {
-                $('.task-area .completed-tasks').text('No completed tasks');
-                $('.button.create').hide();
-                $('.time-list-meta').removeClass('time-list-meta--show');
+                $completedTasks[0].innerHTML = 'No completed tasks';
+                $timeListMeta[0].classList.remove('time-list-meta--show');
             }
         }
 
@@ -248,16 +248,18 @@ function takt() {
                 $currentTaskData[0].innerHTML = '<div>' + $taskLabel[0].value + '</div><div>' + $taskProject[0].value + '</div>';
             });
 
-            // Remove task
-            $(document).on('click', '.time-list li .delete-task', function () {
-                var item = $(this);
-                deleteItem(item);
+            document.addEventListener('click', function(e) {
+                if(e.target && e.target.className == 'delete-task') {
+                    let item = e.target;
+                    deleteItem(item);
+                }
             });
 
-            // Edit task
-            $(document).on('click', '.time-list li .edit-task', function () {
-                var item = $(this);
-                prepareModal(item);
+            document.addEventListener('click', function(e) {
+                if(e.target && e.target.className == 'edit-task') {
+                    let item = e.target;
+                    prepareModal(item);
+                }
             });
 
             $modalClose[0].addEventListener('click', hideModal());
@@ -276,7 +278,7 @@ function takt() {
 
     function bindEvents() {
         document.addEventListener('DOMContentLoaded', function () {
-            if ($('.app--main').length) {
+            if (document.querySelectorAll('.app--main')) {
                 timer();
             }
         });
