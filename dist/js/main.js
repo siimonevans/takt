@@ -1,1 +1,389 @@
-!function(e,t){"object"==typeof exports&&"undefined"!=typeof module?t():"function"==typeof define&&define.amd?define(t):t()}(this,function(){"use strict";function e(){function e(){function e(){R||(R=!0,Q=setInterval(a,1e3),h[0].classList.remove("loader--paused"),window.innerWidth>K&&T[0].focus()),L[0].classList.add("controls--running"),b[0].classList.add("task-form--show"),M[0].classList.add("timer-wrapper--running")}function t(){R=!1,clearInterval(Q),M[0].classList.remove("timer-wrapper--running"),h[0].classList.add("loader--paused"),document.title="Takt"}function n(){t(),o(),P=0,G[0].innerText="00",F[0].innerText="00"}function a(){var e=Math.floor(P/60),t=P%60;P+=1,G[0].innerText=t>=10?t:"0"+t,F[0].innerText=e>=10?e:"0"+e,document.title=_[0].innerHTML+":"+E[0].innerHTML}function l(){var e=Math.floor(P/60),t=P%60,a=""+e+":"+t,l=e,s=t,i=T[0].value,c=q[0].value;r(i,c,a,l,s),v(),o(),n()}function o(){T[0].value="",q[0].value="",b[0].classList.remove("task-form--show"),H[0].innerHTML="",j[0].style.display="none",L[0].classList.remove("controls--running")}function r(e,t,n,a,l){var o=JSON.parse(localStorage.getItem("storageString"))||[],r={title:e,project:t,time:n,minutes:a,seconds:l};o.push(r),localStorage.setItem("storageString",JSON.stringify(o))}function s(e){var t=JSON.parse(localStorage.getItem("storageString")),n=e.closest("li").getAttribute("data-name");Array.prototype.forEach.call(t,function(e,a){if(t[a].title==n)return t.splice(a,1),localStorage.setItem("storageString",JSON.stringify(t)),!1}),v()}function i(e,t,n,a){J[0].value=e,x[0].value=t,W[0].value=n,z[0].value=a,O[0].setAttribute("data-name",e),c()}function c(){O[0].style.display="block"}function d(){O[0].style.display="none"}function u(e){var t=JSON.parse(localStorage.getItem("storageString")),n=e.closest("li").getAttribute("data-name");Array.prototype.forEach.call(t,function(e,a){if(t[a].title==n)return i(t[a].title,t[a].project,t[a].minutes,t[a].seconds),localStorage.setItem("storageString",JSON.stringify(t)),!1})}function m(){var e=JSON.parse(localStorage.getItem("storageString")),t=O[0].getAttribute("data-name");return Array.prototype.forEach.call(e,function(n,a){if(e[a].title==t)return e[a].title=J[0].value,e[a].project=x[0].value,e[a].minutes=W[0].value,e[a].seconds=z[0].value,localStorage.setItem("storageString",JSON.stringify(e)),!1}),v(),d(),!1}function p(){localStorage.removeItem("storageString"),v()}function v(){if(I[0].innerHTML="",localStorage.getItem("storageString")){for(var e=JSON.parse(localStorage.getItem("storageString")),t=e.length,n=0;n<t;n++){var a=e[n].minutes,l=e[n].seconds;0==a?I[0].innerHTML+='<li data-name="'+e[n].title+'"><button class="edit-task"></button><button class="delete-task"></button><div>Task name: <span>'+e[n].title+"</span></div><div>Task project: <span>"+e[n].project+"</span></div><div>Task duration: <span>"+l+" seconds</span></div></li>":I[0].innerHTML+='<li data-name="'+e[n].title+'"><button class="edit-task"></button><button class="delete-task"></button><div>Task name: <span>'+e[n].title+"</span></div><div>Task project: <span>"+e[n].project+"</span></div><div>Task duration: <span>"+a+" minutes and "+l+" seconds</span></div></li>"}B[0].innerHTML="Completed tasks:",N[0].classList.add("time-list-meta--show")}else B[0].innerHTML="No completed tasks",N[0].classList.remove("time-list-meta--show")}function S(){g[0].addEventListener("click",e),f[0].addEventListener("click",t),k[0].addEventListener("click",n),y[0].addEventListener("click",l),A[0].addEventListener("click",p),b[0].addEventListener("submit",function(e){e.preventDefault(),j[0].style.display="block",H[0].innerHTML="<div>"+T[0].value+"</div><div>"+q[0].value+"</div>"}),document.addEventListener("click",function(e){if(e.target&&"delete-task"==e.target.className){var t=e.target;s(t)}}),document.addEventListener("click",function(e){if(e.target&&"edit-task"==e.target.className){var t=e.target;u(t)}}),w[0].addEventListener("click",d()),D[0].addEventListener("submit",function(e){e.preventDefault(),m()}),C[0].addEventListener("click",function(e){e.preventDefault(),m()})}var g=document.querySelectorAll(".start"),f=document.querySelectorAll(".stop"),k=document.querySelectorAll(".cancel"),y=document.querySelectorAll(".finish"),A=document.querySelectorAll(".clear"),L=document.querySelectorAll(".controls"),T=document.querySelectorAll(".task-label"),q=document.querySelectorAll(".task-project"),b=document.querySelectorAll(".task-form"),M=document.querySelectorAll(".timer-wrapper"),h=document.querySelectorAll(".loader"),j=document.querySelectorAll(".current-task"),H=document.querySelectorAll(".current-task__data"),I=document.querySelectorAll(".time-list"),N=document.querySelectorAll(".time-list-meta"),_=document.querySelectorAll(".timer .minutes"),E=document.querySelectorAll(".timer .seconds"),O=document.querySelectorAll(".modal"),w=document.querySelectorAll(".modal__cancel"),J=document.querySelectorAll(".modal__title"),x=document.querySelectorAll(".modal__project"),C=document.querySelectorAll(".modal__save"),D=document.querySelectorAll(".modal__form"),W=document.querySelectorAll(".modal__minutes"),z=document.querySelectorAll(".modal__seconds"),B=document.querySelectorAll(".task-area .completed-tasks"),F=document.querySelectorAll(".minutes"),G=document.querySelectorAll(".seconds"),K=650,P=0,Q=null,R=!1;S()}function t(){document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll(".app--main")&&e()})}t()}function t(){function e(){if(localStorage.getItem("storageString")){var e=JSON.parse(localStorage.getItem("storageString")),t=e.length;if(0!==t){for(var o=0;o<t;o++){var r=e[o].minutes,s=e[o].seconds;0==r?n[0].innerHTML+='<li data-name="'+e[o].title+'"><button class="edit-task"></button><button class="delete-task"></button><div>Task name: <span>'+e[o].title+"</span></div><div>Task project: <span>"+e[o].project+"</span></div><div>Task duration: <span>"+s+" seconds</span></div></li>":n[0].innerHTML+='<li data-name="'+e[o].title+'"><button class="edit-task"></button><button class="delete-task"></button><div>Task name: <span>'+e[o].title+"</span></div><div>Task project: <span>"+e[o].project+"</span></div><div>Task duration: <span>"+r+" minutes and "+s+" seconds</span></div></li>"}l[0].innerHTML="Completed tasks:",a[0].classList.add("time-list-meta--show")}}else l[0].innerHTML="No completed tasks",a[0].classList.remove("time-list-meta--show")}function t(){document.querySelectorAll(".app--main")&&e()}var n=document.querySelectorAll(".time-list"),a=document.querySelectorAll(".time-list-meta"),l=document.querySelectorAll(".task-area .completed-tasks");t()}function n(){function e(){if(localStorage.getItem("storageString")){var e=JSON.parse(localStorage.getItem("storageString")),t=e.length;if(0!==t){for(var l=0;l<t;l++){var o=e[l].time.split(":"),r=o[0],s=o[1];0==r?n.innerHTML="<li><div>Task name: <span>"+e[l].title+"</span></div><div>Task project: <span>"+e[l].project+"</span></div><div>Task duration: <span>"+s+" seconds</span></div></li>":n.innerHTML="<li><div>Task name: <span>"+e[l].title+"</span></div><div>Task project: <span>"+e[l].project+"</span></div><div>Task duration: <span>"+r+" minutes and "+s+" seconds</span></div></li>"}a[0].innerHTML="Completed tasks:"}}else a[0].innerHTML="No existing tasks"}function t(){document.querySelectorAll(".app--main")&&e()}var n=document.querySelectorAll(".time-list"),a=document.querySelectorAll(".task-area .completed-tasks");t()}e(),t(),n()});
+(function (global, factory) {
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory() :
+    typeof define === 'function' && define.amd ? define(factory) :
+    (factory());
+}(this, (function () { 'use strict';
+
+function takt() {
+
+    function timer() {
+        var $startButton = document.querySelectorAll('.start'),
+            $stopButton = document.querySelectorAll('.stop'),
+            $resetButton = document.querySelectorAll('.cancel'),
+            $saveButton = document.querySelectorAll('.finish'),
+            $clearButton = document.querySelectorAll('.clear'),
+            $controls = document.querySelectorAll('.controls'),
+            $taskLabel = document.querySelectorAll('.task-label'),
+            $taskProject = document.querySelectorAll('.task-project'),
+            $taskForm = document.querySelectorAll('.task-form'),
+            $timerWrapper = document.querySelectorAll('.timer-wrapper'),
+            $loader = document.querySelectorAll('.loader'),
+            $currentTask = document.querySelectorAll('.current-task'),
+            $currentTaskData = document.querySelectorAll('.current-task__data'),
+            $timeList = document.querySelectorAll('.time-list'),
+            $timeListMeta = document.querySelectorAll('.time-list-meta'),
+            $timerMinutes = document.querySelectorAll('.timer .minutes'),
+            $timerSeconds = document.querySelectorAll('.timer .seconds'),
+            $modal = document.querySelectorAll('.modal'),
+            $modalClose = document.querySelectorAll('.modal__cancel'),
+            $modalTitle = document.querySelectorAll('.modal__title'),
+            $modalProject = document.querySelectorAll('.modal__project'),
+            $modalSave = document.querySelectorAll('.modal__save'),
+            $modalForm = document.querySelectorAll('.modal__form'),
+            $modalMinutes = document.querySelectorAll('.modal__minutes'),
+            $modalSeconds = document.querySelectorAll('.modal__seconds'),
+            $completedTasks = document.querySelectorAll('.task-area .completed-tasks'),
+            $themeSwitch = document.querySelectorAll('.theme-switch'),
+            minutes = document.querySelectorAll('.minutes'),
+            seconds = document.querySelectorAll('.seconds'),
+            mobileBreakpoint = 650;
+
+        var timerTime = 0,
+            interval = null,
+            isRunning = false;
+
+        // Run timer
+        function startTimer() {
+            if (!isRunning) {
+                isRunning = true;
+                interval = setInterval(incrementTimer, 1000);
+                $loader[0].classList.remove('loader--paused');
+
+                // Only focus input on tablet+
+                if (window.innerWidth > mobileBreakpoint) {
+                    $taskLabel[0].focus();
+                }
+            }
+
+            // Update UI
+            $controls[0].classList.add('controls--running');
+            $taskForm[0].classList.add('task-form--show');
+            $timerWrapper[0].classList.add('timer-wrapper--running');
+        }
+
+        // Stop timer
+        function stopTimer() {
+            isRunning = false;
+            clearInterval(interval);
+
+            // Update UI
+            $timerWrapper[0].classList.remove('timer-wrapper--running');
+            $loader[0].classList.add('loader--paused');
+
+            document.title = 'Takt';
+        }
+
+        // Reset timer to zero
+        function resetTimer() {
+            stopTimer();
+            resetUI();
+            timerTime = 0;
+            seconds[0].innerText = '00';
+            minutes[0].innerText = '00';
+        }
+
+        // Increment timer
+        function incrementTimer() {
+            var numOfMinutes = Math.floor(timerTime / 60),
+                numOfSeconds = timerTime % 60;
+
+            timerTime = timerTime + 1;
+            seconds[0].innerText = numOfSeconds >= 10 ? numOfSeconds : '0' + numOfSeconds;
+            minutes[0].innerText = numOfMinutes >= 10 ? numOfMinutes : '0' + numOfMinutes;
+
+            document.title = $timerMinutes[0].innerHTML + ':' + $timerSeconds[0].innerHTML;
+        }
+
+        // Get timer value
+        function saveTimer() {
+            var numOfMinutes = Math.floor(timerTime / 60),
+                numOfSeconds = timerTime % 60,
+                time = '' + numOfMinutes + ':' + numOfSeconds,
+                minutes = numOfMinutes,
+                seconds = numOfSeconds,
+                label = $taskLabel[0].value,
+                project = $taskProject[0].value;
+
+            addStoredItem(label, project, time, minutes, seconds);
+            updateTimeList();
+            resetUI();
+            resetTimer();
+        }
+
+        // Reset UI
+        function resetUI() {
+            $taskLabel[0].value = '';
+            $taskProject[0].value = '';
+            $taskForm[0].classList.remove('task-form--show');
+            $currentTaskData[0].innerHTML = '';
+            $currentTask[0].style.display = 'none';
+            $controls[0].classList.remove('controls--running');
+        }
+
+        // Add tasks to localStorage
+        // Save data in one long string for easier addition/removal/editing
+        function addStoredItem(title, project, time, minutes, seconds) {
+            var existingItems = JSON.parse(localStorage.getItem('storageString')) || [];
+            var newItem = {
+                title: title,
+                project: project,
+                time: time,
+                minutes: minutes,
+                seconds: seconds
+            };
+
+            existingItems.push(newItem);
+            localStorage.setItem('storageString', JSON.stringify(existingItems));
+        }
+
+        // Remove tasks from locaStorage
+        function deleteItem(item) {
+            var data = JSON.parse(localStorage.getItem('storageString')),
+                clickedItem = item.closest('li').getAttribute('data-name');
+
+            Array.prototype.forEach.call(data, function (el, i) {
+                if (data[i].title == clickedItem) {
+                    data.splice(i, 1);
+                    localStorage.setItem('storageString', JSON.stringify(data));
+                    return false;
+                }
+            });
+
+            // Update task list to show localStorage data
+            updateTimeList();
+        }
+
+        function populateModal(title, project, minutes, seconds) {
+            $modalTitle[0].value = title;
+            $modalProject[0].value = project;
+            $modalMinutes[0].value = minutes;
+            $modalSeconds[0].value = seconds;
+            $modal[0].setAttribute('data-name', title);
+            showModal();
+        }
+
+        function showModal() {
+            $modal[0].style.display = 'block';
+        }
+
+        function hideModal() {
+            $modal[0].style.display = 'none';
+        }
+
+        // Prepare/populate modal
+        function prepareModal(item) {
+            var data = JSON.parse(localStorage.getItem('storageString')),
+                clickedItem = item.closest('li').getAttribute('data-name');
+
+            Array.prototype.forEach.call(data, function (el, i) {
+                if (data[i].title == clickedItem) {
+                    populateModal(data[i].title, data[i].project, data[i].minutes, data[i].seconds);
+                    localStorage.setItem('storageString', JSON.stringify(data));
+                    return false;
+                }
+            });
+        }
+
+        // Save modal contents
+        function saveModal() {
+            var data = JSON.parse(localStorage.getItem('storageString')),
+                currentItem = $modal[0].getAttribute('data-name');
+
+            Array.prototype.forEach.call(data, function (el, i) {
+                if (data[i].title == currentItem) {
+                    data[i].title = $modalTitle[0].value;
+                    data[i].project = $modalProject[0].value;
+                    data[i].minutes = $modalMinutes[0].value;
+                    data[i].seconds = $modalSeconds[0].value;
+                    localStorage.setItem('storageString', JSON.stringify(data));
+                    return false;
+                }
+            });
+
+            // Update task list to show localStorage data
+            updateTimeList();
+            hideModal();
+            return false;
+        }
+
+        // Remove all tasks from localStorage
+        function clearData() {
+            localStorage.removeItem('storageString');
+            updateTimeList();
+        }
+
+        // Update UI
+        function updateTimeList() {
+
+            // Empty list contents
+            $timeList[0].innerHTML = '';
+
+            if (localStorage.getItem('storageString')) {
+                var data = JSON.parse(localStorage.getItem('storageString'));
+                var arrayLength = data.length;
+
+                for (var i = 0; i < arrayLength; i++) {
+                    var _minutes = data[i].minutes;
+                    var _seconds = data[i].seconds;
+
+                    if (_minutes == 0) {
+                        $timeList[0].innerHTML += '<li data-name="' + data[i].title + '"><button class="edit-task"></button><button class="delete-task"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task project: <span>' + data[i].project + '</span></div><div>Task duration: <span>' + _seconds + ' seconds</span></div></li>';
+                    } else {
+                        $timeList[0].innerHTML += '<li data-name="' + data[i].title + '"><button class="edit-task"></button><button class="delete-task"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task project: <span>' + data[i].project + '</span></div><div>Task duration: <span>' + _minutes + ' minutes and ' + _seconds + ' seconds</span></div></li>';
+                    }
+                }
+
+                $completedTasks[0].innerHTML = 'Completed tasks:';
+                $timeListMeta[0].classList.add('time-list-meta--show');
+            } else {
+                $completedTasks[0].innerHTML = 'No completed tasks';
+                $timeListMeta[0].classList.remove('time-list-meta--show');
+            }
+        }
+
+        function themeSwitch() {
+            document.body.classList.toggle('light-theme');
+        }
+
+        function eventHandler() {
+            $startButton[0].addEventListener('click', startTimer);
+            $stopButton[0].addEventListener('click', stopTimer);
+            $resetButton[0].addEventListener('click', resetTimer);
+            $saveButton[0].addEventListener('click', saveTimer);
+            $clearButton[0].addEventListener('click', clearData);
+            $themeSwitch[0].addEventListener('click', themeSwitch);
+
+            // Set current task
+            $taskForm[0].addEventListener('submit', function (e) {
+                e.preventDefault();
+                $currentTask[0].style.display = 'block';
+                $currentTaskData[0].innerHTML = '<div>' + $taskLabel[0].value + '</div><div>' + $taskProject[0].value + '</div>';
+            });
+
+            document.addEventListener('click', function (e) {
+                if (e.target && e.target.className == 'delete-task') {
+                    var item = e.target;
+                    deleteItem(item);
+                }
+            });
+
+            document.addEventListener('click', function (e) {
+                if (e.target && e.target.className == 'edit-task') {
+                    var item = e.target;
+                    prepareModal(item);
+                }
+            });
+
+            $modalClose[0].addEventListener('click', hideModal());
+            $modalForm[0].addEventListener('submit', function (e) {
+                e.preventDefault();
+                saveModal();
+            });
+            $modalSave[0].addEventListener('click', function (e) {
+                e.preventDefault();
+                saveModal();
+            });
+        }
+
+        eventHandler();
+    }
+
+    function bindEvents() {
+        document.addEventListener('DOMContentLoaded', function () {
+            if (document.querySelectorAll('.app--main')) {
+                timer();
+            }
+        });
+    }
+
+    bindEvents();
+}
+
+function getLocalStorage() {
+
+    var $timeList = document.querySelectorAll('.time-list'),
+        $timeListMeta = document.querySelectorAll('.time-list-meta'),
+        $completedTasks = document.querySelectorAll('.task-area .completed-tasks');
+
+    function getData() {
+
+        if (localStorage.getItem('storageString')) {
+            var data = JSON.parse(localStorage.getItem('storageString'));
+            var arrayLength = data.length;
+
+            if (arrayLength !== 0) {
+                for (var i = 0; i < arrayLength; i++) {
+                    var minutes = data[i].minutes;
+                    var seconds = data[i].seconds;
+
+                    if (minutes == 0) {
+                        $timeList[0].innerHTML += '<li data-name="' + data[i].title + '"><button class="edit-task"></button><button class="delete-task"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task project: <span>' + data[i].project + '</span></div><div>Task duration: <span>' + seconds + ' seconds</span></div></li>';
+                    } else {
+                        $timeList[0].innerHTML += '<li data-name="' + data[i].title + '"><button class="edit-task"></button><button class="delete-task"></button><div>Task name: <span>' + data[i].title + '</span></div><div>Task project: <span>' + data[i].project + '</span></div><div>Task duration: <span>' + minutes + ' minutes and ' + seconds + ' seconds</span></div></li>';
+                    }
+                }
+
+                $completedTasks[0].innerHTML = 'Completed tasks:';
+                $timeListMeta[0].classList.add('time-list-meta--show');
+            }
+        } else {
+            $completedTasks[0].innerHTML = 'No completed tasks';
+            $timeListMeta[0].classList.remove('time-list-meta--show');
+        }
+    }
+
+    function bindEvents() {
+        if (document.querySelectorAll('.app--main')) {
+            getData();
+        }
+    }
+
+    bindEvents();
+}
+
+function timesheet() {
+
+    var $timeList = document.querySelectorAll('.time-list'),
+        $completedTasks = document.querySelectorAll('.task-area .completed-tasks');
+
+    function getData() {
+
+        if (localStorage.getItem('storageString')) {
+            var data = JSON.parse(localStorage.getItem('storageString'));
+            var arrayLength = data.length;
+
+            if (arrayLength !== 0) {
+                for (var i = 0; i < arrayLength; i++) {
+                    var totalTime = data[i].time.split(':');
+                    var minutes = totalTime[0];
+                    var seconds = totalTime[1];
+
+                    if (minutes == 0) {
+                        $timeList.innerHTML = '<li><div>Task name: <span>' + data[i].title + '</span></div><div>Task project: <span>' + data[i].project + '</span></div><div>Task duration: <span>' + seconds + ' seconds</span></div></li>';
+                    } else {
+                        $timeList.innerHTML = '<li><div>Task name: <span>' + data[i].title + '</span></div><div>Task project: <span>' + data[i].project + '</span></div><div>Task duration: <span>' + minutes + ' minutes and ' + seconds + ' seconds</span></div></li>';
+                    }
+                }
+
+                $completedTasks[0].innerHTML = 'Completed tasks:';
+            }
+        } else {
+            $completedTasks[0].innerHTML = 'No existing tasks';
+        }
+    }
+
+    function bindEvents() {
+        if (document.querySelectorAll('.app--main')) {
+            getData();
+        }
+    }
+
+    bindEvents();
+}
+
+takt();
+getLocalStorage();
+timesheet();
+
+})));
+//# sourceMappingURL=main.js.map

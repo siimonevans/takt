@@ -27,6 +27,7 @@ function takt() {
             $modalMinutes       = document.querySelectorAll('.modal__minutes'),
             $modalSeconds       = document.querySelectorAll('.modal__seconds'),
             $completedTasks     = document.querySelectorAll('.task-area .completed-tasks'),
+            $themeSwitch        = document.querySelectorAll('.theme-switch'),
             minutes             = document.querySelectorAll('.minutes'),
             seconds             = document.querySelectorAll('.seconds'),
             mobileBreakpoint    = 650;
@@ -234,12 +235,17 @@ function takt() {
             }
         }
 
+        function themeSwitch() {
+            document.body.classList.toggle('light-theme');
+        }
+
         function eventHandler() {
             $startButton[0].addEventListener('click', startTimer);
             $stopButton[0].addEventListener('click', stopTimer);
             $resetButton[0].addEventListener('click', resetTimer);
             $saveButton[0].addEventListener('click', saveTimer);
             $clearButton[0].addEventListener('click', clearData);
+            $themeSwitch[0].addEventListener('click', themeSwitch);
 
             // Set current task
             $taskForm[0].addEventListener('submit', function(e) {
