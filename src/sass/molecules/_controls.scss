@@ -19,7 +19,7 @@
     .stop,
     .finish,
     .cancel {
-        opacity: 0.2;
+        opacity: 0.5;
 
         &:hover,
         &:focus {
@@ -72,6 +72,10 @@
         &--show {
             opacity: 1;
             transform: translate3d(0, 0, 0);
+        }
+
+        label {
+            @include hidden;
         }
     }
 }
