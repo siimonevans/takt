@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-US">
   <head>
     <title>Takt</title>
     <meta charset="UTF-8">
@@ -72,8 +72,10 @@
           <button class="button finish">Finish</button>
           <button class="button cancel">Cancel</button>
           <form class="task-form">
-            <input type="text" class="task-label" placeholder="Task name&hellip;">
-            <input type="text" class="task-project" placeholder="Task project&hellip;">
+            <label for="task-name">Task Name</label>
+            <input type="text" class="task-label" placeholder="Task name&hellip;" id="task-name">
+            <label for="task-project">Task Project</label>
+            <input type="text" class="task-project" placeholder="Task project&hellip;" id="task-project">
             <input type="submit" class="task-submit">
           </form>
         </div>
