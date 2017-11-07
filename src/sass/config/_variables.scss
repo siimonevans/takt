@@ -6,40 +6,9 @@
 /* ============================================
    Colours
 */
-
-// Theme colours
-$color--primary: #775950;
-$color--secondary: #81d1e0;
-$color--tertiary: #ebebec;
-$color--quaternary: #000;
-$color--quinary: #bac030;
-$color--senary: #f4b12f;
-$color--septenary: #f5821f;
-$color--octonary: #ef405c;
-$color--nonary: #9879b7;
-$color--denary: #67c9ef;
-
-// Type colours
 $color--default: #000;
 $color--link: #000;
 $color--white: #fff;
-
-// Misc
-$color--border: #eee;
-
-// Button colours
-$button-colours: (
-    primary:    (bg: $color--primary, color: #fff),
-    secondary:  (bg: $color--secondary, color: #000),
-    tertiary:   (bg: $color--tertiary, color: #000),
-    quaternary: (bg: $color--quaternary, color: #fff),
-    quinary:    (bg: $color--quinary, color: #fff),
-    senary:     (bg: $color--senary, color: #fff),
-    septenary:  (bg: $color--septenary, color: #fff),
-    octonary:   (bg: $color--octonary, color: #fff),
-    nonary:     (bg: $color--nonary, color: #fff),
-    denary:     (bg: $color--denary, color: #000),
-);
 
 
 /* ============================================
@@ -102,21 +71,3 @@ $breakpoint-has-widths: (
     Transition speeds
 */
 $default-transition-speed: 300ms;
-
-
-/* ============================================
-    Z-index 
-*/
-$z-alpha:       7;
-$z-beta:        6;
-$z-gamma:       5;
-$z-delta:       4;
-$z-epsilon:     3;
-$z-zeta:        2;
-$z-milli:       1;
-$z-base:        0;
-$z-hidden:     -1;
-
-$z-giga:        9999;
-$z-mega:        110;
-$z-kilo:        109;

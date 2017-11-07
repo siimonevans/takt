@@ -49,16 +49,6 @@
 
 
 /* ============================================
-  iOS Native vertical scroll
-*/
-@mixin native-vertical-scroll {
-    overflow-x: hidden;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch; // sass-lint:disable-line no-misspelled-properties
-}
-
-
-/* ============================================
     Output a rem and px fallback value for the given property
 */
 @mixin rem($property, $values) {

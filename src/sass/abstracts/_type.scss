@@ -56,19 +56,3 @@ html,
 blockquote {
     @include quote-text;
 }
-
-
-/* ============================================
-    Default sizes
-*/
-h1, .alpha   { @include font-size(alpha); }
-h2, .beta    { @include font-size(beta); }
-h3, .gamma   { @include font-size(gamma); }
-h4, .delta   { @include font-size(delta); }
-h5, .epsilon { @include font-size(epsilon); }
-h6, .zeta    { @include font-size(zeta); }
-
-.giga { @include font-size(giga); }
-.mega { @include font-size(mega); }
-.kilo { @include font-size(kilo); }
-small, .milli { @include font-size(milli); }
