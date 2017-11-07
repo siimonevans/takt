@@ -26,4 +26,8 @@
             width: 20px;
         }
     }
+
+    span {
+        @include hidden;
+    }
 }
