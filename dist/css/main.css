@@ -1048,7 +1048,7 @@ small, .milli {
 .controls .stop,
 .controls .finish,
 .controls .cancel {
-  opacity: 0.2;
+  opacity: 0.5;
 }
 
 .controls .stop:hover, .controls .stop:focus,
