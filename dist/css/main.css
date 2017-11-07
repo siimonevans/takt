@@ -1112,6 +1112,14 @@ small, .milli {
   transform: translate3d(0, 0, 0);
 }
 
+.controls .task-form label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
 /*------------------------------------*    $CURRENT TASK
 \*------------------------------------*/
 .current-task {
