@@ -3,18 +3,23 @@
 
 Another time tracking app, [try it out here.](https://sii.im/playground/takt)
 
-Features:
-- Add new tasks with a title and relevant project name
+### Features:
+- Add tasks, assigning a title and relevant project name
 - Save tasks as they reach completion
 - Pause/cancel tasks
+- Edit tasks
 - Delete existing (saved) tasks
 - Track individual tasks currently in progress
-- Delete all tasks
-- Save all tasks to timesheet
+- Export all tasks to timesheet
+- Progressive Web App:
 
-Limitations:
+<img src="https://sii.im/playground/takt/takt-score.png" alt="Takt app audit rating" width='726px'>
+
+### Support:
+- IE9+
+- WCAG 2.0 AA compliant
+- NPM script tooling
+- Vanilla JS
+
+### Limitations:
 - No cross-device support - everything is saved in LocalStorage
-
-Bundled with a Service Worker for offline support.
-
-<img src="https://sii.im/playground/takt/takt-score.png" alt="Takt app audit" width='726px'>
