@@ -15,6 +15,6 @@ Features:
 Limitations:
 - No cross-device support - everything is saved in LocalStorage
 
-Bundled with a Service Worker for offline support, and made as PWA-y as possible:
+Bundled with a Service Worker for offline support.
 
-<img src="https://sii.im/playground/takt/takt-lighthouse.png" alt="Takt app lighthouse score" width='200px'>
+<img src="https://sii.im/playground/takt/takt-score.png" alt="Takt app audit" width='726px'>
