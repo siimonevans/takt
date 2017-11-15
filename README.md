@@ -8,8 +8,8 @@ Another time tracking app, [try it out here.](https://sii.im/playground/takt)
 - Save tasks as they reach completion
 - Pause/cancel tasks
 - Edit tasks
-- Delete existing (saved) tasks
-- Track individual tasks currently in progress
+- Delete existing tasks
+- Track task currently in progress
 - Export all tasks to timesheet
 - Progressive Web App:
 
@@ -20,6 +20,3 @@ Another time tracking app, [try it out here.](https://sii.im/playground/takt)
 - WCAG 2.0 AA compliant
 - NPM script tooling
 - Vanilla JS
-
-### Limitations:
-- No cross-device support - everything is saved in LocalStorage
